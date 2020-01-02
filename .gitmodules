@@ -25,3 +25,9 @@
 [submodule "estafet-blockchain-demo-pages-lib"]
 	path = estafet-blockchain-demo-pages-lib
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-pages-lib
+[submodule "estafet-blockchain-demo-qa"]
+	path = estafet-blockchain-demo-qa
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-qa
+[submodule "estafet-blockchain-demo-qa-prod"]
+	path = estafet-blockchain-demo-qa-prod
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-prod
