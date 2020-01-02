@@ -1,0 +1,27 @@
+[submodule "estafet-blockchain-demo-console-ui"]
+	path = estafet-blockchain-demo-console-ui
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-console-ui
+[submodule "estafet-blockchain-demo-coin-transfer-ms"]
+	path = estafet-blockchain-demo-coin-transfer-ms
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-coin-transfer-ms
+[submodule "estafet-blockchain-demo-currency-converter-ms"]
+	path = estafet-blockchain-demo-currency-converter-ms
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-currency-converter-ms
+[submodule "estafet-blockchain-demo-validator-gateway-ms"]
+	path = estafet-blockchain-demo-validator-gateway-ms
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-validator-gateway-ms
+[submodule "estafet-blockchain-demo-wallet-ms"]
+	path = estafet-blockchain-demo-wallet-ms
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-wallet-ms
+[submodule "estafet-blockchain-demo-bank-ms"]
+	path = estafet-blockchain-demo-bank-ms
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-bank-ms
+[submodule "estafet-blockchain-demo-messages-lib"]
+	path = estafet-blockchain-demo-messages-lib
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-messages-lib
+[submodule "estafet-blockchain-demo-data-lib"]
+	path = estafet-blockchain-demo-data-lib
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-data-lib
+[submodule "estafet-blockchain-demo-pages-lib"]
+	path = estafet-blockchain-demo-pages-lib
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-pages-lib
