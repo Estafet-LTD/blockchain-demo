@@ -1,9 +1,6 @@
 [submodule "estafet-blockchain-demo-console-ui"]
 	path = estafet-blockchain-demo-console-ui
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-console-ui
-[submodule "estafet-blockchain-demo-coin-transfer-ms"]
-	path = estafet-blockchain-demo-coin-transfer-ms
-	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-coin-transfer-ms
 [submodule "estafet-blockchain-demo-currency-converter-ms"]
 	path = estafet-blockchain-demo-currency-converter-ms
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-currency-converter-ms
