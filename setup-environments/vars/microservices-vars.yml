@@ -17,6 +17,10 @@ microservices:
     repo: estafet-blockchain-demo-validator-gateway-ms
     expose: false    
     db: false
+  - name: validator-events-ms
+    repo: estafet-blockchain-demo-validator-events-ms
+    expose: false    
+    db: true    
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
     expose: false

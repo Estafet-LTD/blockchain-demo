@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose --provider openshift --file docker-compose.yml --build build-config
+      convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: node2
+  name: node2
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: node2
+  strategy:
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: node2
+    spec:
+      containers:
+      - args:
+        - ./autonity-start.sh
+        image: ' '
+        name: autonity-node-2
+        ports:
+        - containerPort: 8545
+        - containerPort: 30303
+        - containerPort: 30303
+          protocol: UDP
+        resources: {}
+        volumeMounts:
+        - mountPath: /nodekey
+          name: node2-claim0
+          readOnly: true
+        - mountPath: /keystore
+          name: node2-claim1
+          readOnly: true
+        - mountPath: /genesis.json
+          name: node2-claim2
+          readOnly: true
+        - mountPath: /autonity-start.sh
+          name: node2-claim3
+          readOnly: true
+      restartPolicy: Always
+      volumes:
+      - name: node2-claim0
+        persistentVolumeClaim:
+          claimName: node2-claim0
+          readOnly: true
+      - name: node2-claim1
+        persistentVolumeClaim:
+          claimName: node2-claim1
+          readOnly: true
+      - name: node2-claim2
+        persistentVolumeClaim:
+          claimName: node2-claim2
+          readOnly: true
+      - name: node2-claim3
+        persistentVolumeClaim:
+          claimName: node2-claim3
+          readOnly: true
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - autonity-node-2
+      from:
+        kind: ImageStreamTag
+        name: node2:helloworld
+    type: ImageChange
+status: {}

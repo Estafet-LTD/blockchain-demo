@@ -1,13 +1,13 @@
 ---
 # Project definition - add new libraries here
 libraries:
-  - name: parent
-    repo: estafet-microservices-scrum-parent
+  - name: messages-lib
+    repo: estafet-blockchain-demo-messages-lib
   - name: commons-lib
-    repo: estafet-microservices-scrum-commons-lib    
+    repo: estafet-blockchain-demo-commons-lib    
   - name: pages-lib
-    repo: estafet-microservices-scrum-pages-lib
+    repo: estafet-blockchain-demo-pages-lib
   - name: data-lib
-    repo: estafet-microservices-scrum-data-lib   
+    repo: estafet-blockchain-demo-data-lib   
             
     
