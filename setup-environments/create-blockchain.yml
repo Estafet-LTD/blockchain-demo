@@ -1,0 +1,9 @@
+---
+- name: Create Blockchain
+  hosts: local  
+  tasks:          
+    - include_role:
+        name: blockchain-setup  
+      vars:
+        cloud_project: autonity  
+

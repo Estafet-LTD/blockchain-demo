@@ -1,0 +1,18 @@
+---
+- include_role: 
+    name : init
+ 
+- name: Switch to Namespace {{ cloud_project }}
+  shell: "oc project {{ cloud_project }}"
+  tags:
+    - openshift  
+        
+- include_role: 
+    name: create-node
+  vars:
+    project: "{{ cloud_project }}"
+    node: "{{ item.node }}"
+    nodekey: "{{ item.nodekey }}"
+    nodeport85: "{{ item.nodeport85 }}"
+    nodeport30: "{{ item.nodeport30 }}"
+  with_items: "{{ nodes }}"  
