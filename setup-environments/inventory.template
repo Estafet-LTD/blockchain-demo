@@ -14,3 +14,6 @@ password=developer
 
 # database host (only required for cloud environment) 
 #database=some_dbhost.amw.com
+
+# the number your project
+cloud_project=dq00
