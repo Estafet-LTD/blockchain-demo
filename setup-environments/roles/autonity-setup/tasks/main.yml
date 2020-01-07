@@ -24,7 +24,7 @@
     - openshift
   
 - include_role: 
-    name: create-node
+    name: create-autonity-node
   vars:
     project: "{{ cloud_project }}"
     node: "{{ item.node }}"
