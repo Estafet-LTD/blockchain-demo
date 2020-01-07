@@ -1,35 +1,11 @@
 ---
-- name: Create the {{ node }} build config
-  shell: 'oc process -n {{ project }} -f templates/{{ node }}-build-config.yml -p NODE={{ node }} | oc apply -f -'
-  register: command_result
-  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
-  changed_when: "'exists' not in command_result.stderr"
-  tags:
-    - openshift         
-
-- name: Start the {{ node }} build
-  shell: 'oc start-build {{ node }} --wait -n {{ project }}'
-  register: command_result
-  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
-  changed_when: "'exists' not in command_result.stderr"
-  tags:
-    - openshift
-
 - name: Create the {{ node }} deployment config
-  shell: 'oc process -n {{ node }} -f templates/{{ node }}-config.yml -p NODE={{ node }} -p NODEKEY={{ nodekey }} -p NODEPORT_85={{ nodeport85 }} -p NODEPORT_30={{ nodeport30 }} | oc apply -f -'
+  shell: 'oc process -n {{ project }} -f templates/node-deploy-template.yml -p NODE={{ node }} -p NODEKEY={{ nodekey }} -p NODEPORT_85={{ nodeport85 }} -p NODEPORT_30={{ nodeport30 }} | oc apply -f -'
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
   tags:
     - openshift     
-
-- name: Start the {{ node }} deployment
-  shell: 'oc deploy {{ node }} -n {{ project }}'
-  register: command_result
-  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
-  changed_when: "'exists' not in command_result.stderr"
-  tags:
-    - openshift
 
 - name: Wait for {{ node }} to become available
   shell : "oc rollout status dc/{{ node }}"

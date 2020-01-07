@@ -6,7 +6,23 @@
   shell: "oc project {{ cloud_project }}"
   tags:
     - openshift  
-        
+
+- name: Build the node image
+  shell: 'oc process -n {{ cloud_project }} -f templates/node-build-template.yml | oc apply -f -'
+  register: command_result
+  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+  changed_when: "'exists' not in command_result.stderr"
+  tags:
+    - openshift   
+
+- name: Start the node build
+  shell: 'oc start-build node --wait -n {{ cloud_project }}'
+  register: command_result
+  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+  changed_when: "'exists' not in command_result.stderr"
+  tags:
+    - openshift
+  
 - include_role: 
     name: create-node
   vars:
