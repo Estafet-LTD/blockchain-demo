@@ -10,7 +10,7 @@ microservices:
     repo: estafet-blockchain-demo-currency-converter-ms
     expose: false 
     db: true
-    ignore: true
+    ignore: false
   - name: console-ui     
     repo: estafet-blockchain-demo-console-ui
     expose: true  
