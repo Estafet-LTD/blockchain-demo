@@ -51,3 +51,136 @@ objects:
       name: helloworld
   status:
     dockerImageRepository: ""
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: go-ethereum
+    name: go-ethereum
+    namespace: blockchain-demo-dq04
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: 'go-ethereum:latest'
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      git:
+        uri: 'https://github.com/Estafet-LTD/go-ethereum.git'
+      type: Git
+    strategy:
+      dockerStrategy:
+        from:
+          kind: ImageStreamTag
+          name: 'client-go:latest'
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+      - imageChange:
+          lastTriggeredImageID: >-
+            ethereum/client-go@sha256:14f8034ac676a8b85991f494151c717ec55a6d10a6c1359f5333dd0dd03de876
+        type: ImageChange
+      - type: ConfigChange
+      - github:
+          secret: AngygwksLkl5tLe5WnUT
+        type: GitHub
+      - generic:
+          secret: 22fOHUzr0ebIQglWsyi_
+        type: Generic
+  status:
+    lastVersion: 17
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    creationTimestamp: null
+    generation: 1
+    labels:
+      app: go-ethereum
+    name: go-ethereum
+    namespace: blockchain-demo-dq04
+  spec:
+    lookupPolicy:
+      local: false
+  status:
+    dockerImageRepository: 'docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum'
+    tags:
+      - items:
+          - created: '2020-01-09T20:51:02Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:830e5e74ae4cd82cbd59602dec8dd20449f5e4763f8b730ffc42c34996f68b75
+            generation: 1
+            image: >-
+              sha256:830e5e74ae4cd82cbd59602dec8dd20449f5e4763f8b730ffc42c34996f68b75
+          - created: '2020-01-09T20:47:14Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:043c12c6dba230d794e0838cb7d766b02f534199c2ff45d6099f8f5dd1af06fa
+            generation: 1
+            image: >-
+              sha256:043c12c6dba230d794e0838cb7d766b02f534199c2ff45d6099f8f5dd1af06fa
+          - created: '2020-01-09T20:31:23Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:bfc45d561c1891ba0ed6b2a388a7ed19ba67a26a71e8f59ffa74b8181a345cb4
+            generation: 1
+            image: >-
+              sha256:bfc45d561c1891ba0ed6b2a388a7ed19ba67a26a71e8f59ffa74b8181a345cb4
+          - created: '2020-01-09T20:13:13Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:8cce4d3845877601816a8c702776cde12b443d2ce79efd4ad3d4a9e7b992623b
+            generation: 1
+            image: >-
+              sha256:8cce4d3845877601816a8c702776cde12b443d2ce79efd4ad3d4a9e7b992623b
+          - created: '2020-01-09T20:07:02Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:e715f3c7cca46e13821663f87cde7145df17680b133f30b049aaa381888f257d
+            generation: 1
+            image: >-
+              sha256:e715f3c7cca46e13821663f87cde7145df17680b133f30b049aaa381888f257d
+          - created: '2020-01-09T20:01:58Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:6244a906b655012957953ba7654b8a740da3e79d4e1e6edafb81de3cc0e8069f
+            generation: 1
+            image: >-
+              sha256:6244a906b655012957953ba7654b8a740da3e79d4e1e6edafb81de3cc0e8069f
+          - created: '2020-01-09T15:04:29Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:e2824e1f44e9350184a0168006981bf42a25287f7af4de66a7d1d468b10bac70
+            generation: 1
+            image: >-
+              sha256:e2824e1f44e9350184a0168006981bf42a25287f7af4de66a7d1d468b10bac70
+          - created: '2020-01-09T12:40:14Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:cfc5140d2ecce2ee3df0b49a33548b776856bb88f5c7ff2083879b9ce9e236fe
+            generation: 1
+            image: >-
+              sha256:cfc5140d2ecce2ee3df0b49a33548b776856bb88f5c7ff2083879b9ce9e236fe
+          - created: '2020-01-09T11:33:20Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:2e5e83baec7577ed8afe3a55327cde9822d8c6eb058aad727de1bca7aab95907
+            generation: 1
+            image: >-
+              sha256:2e5e83baec7577ed8afe3a55327cde9822d8c6eb058aad727de1bca7aab95907
+          - created: '2020-01-09T11:20:14Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:60b2b0ddac0fa174df17821b61ae9dd0067148c19476c44e1967533b9f4aa816
+            generation: 1
+            image: >-
+              sha256:60b2b0ddac0fa174df17821b61ae9dd0067148c19476c44e1967533b9f4aa816
+          - created: '2020-01-09T11:10:12Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:8d7139e82fb9f5379766ad82b7b1e465294d355e7038228b458b1f445036d64b
+            generation: 1
+            image: >-
+              sha256:8d7139e82fb9f5379766ad82b7b1e465294d355e7038228b458b1f445036d64b
+          - created: '2020-01-09T11:00:27Z'
+            dockerImageReference: >-
+              docker-registry.default.svc:5000/blockchain-demo-dq04/go-ethereum@sha256:c9cd9a33123ba01030eb0f99d9c3e7a18e6ed92eefff0eb9181c4310f9b39b18
+            generation: 1
+            image: >-
+              sha256:c9cd9a33123ba01030eb0f99d9c3e7a18e6ed92eefff0eb9181c4310f9b39b18
+        tag: latest
+    
