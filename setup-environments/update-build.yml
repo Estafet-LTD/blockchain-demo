@@ -3,11 +3,11 @@
   hosts: local
   tasks:
     - include_role:
-        name: test-environment-setup   
+        name: build-environment-setup   
     - include_role:
         name: blockchain-setup  
       vars:
-        project: "{{ product }}-test"  
+        project: "{{ product }}-build"  
         local: false
          
   

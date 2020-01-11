@@ -1,12 +1,12 @@
 ---
 - name: Update the Product Environment
   hosts: local
-  roles:
-    - prod-namespace-setup
   tasks:
     - include_role:
-      name: blockchain-setup  
+        name: prod-namespace-setup  
+    - include_role:
+        name: blockchain-setup  
       vars:
         project: "{{ product }}-prod"  
-        local: false             
+        local: false           
   

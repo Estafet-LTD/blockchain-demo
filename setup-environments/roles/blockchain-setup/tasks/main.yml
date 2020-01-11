@@ -12,6 +12,7 @@
 
 - name: Create the service account
   shell: 'oc create serviceaccount useroot -n {{ project }}'
+  ignore_errors: yes
   when: not local
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
@@ -21,6 +22,7 @@
 
 - name: Bind the service account to anyuid
   shell: 'oc adm policy add-scc-to-user anyuid -z useroot'
+  ignore_errors: yes
   when: not local
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
@@ -38,6 +40,7 @@
 
 - name: Patch the service account for the deployment config
   shell: 'oc patch dc/go-ethereum -p ''{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'' -n {{ project }}'
+  ignore_errors: yes
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
