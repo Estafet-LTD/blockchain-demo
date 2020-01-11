@@ -3,6 +3,12 @@
   hosts: local
   roles:
     - test-environment-setup
+  tasks:
+    - include_role:
+      name: blockchain-setup  
+      vars:
+        project: "{{ product }}-test"  
+        local: false    
 
          
   

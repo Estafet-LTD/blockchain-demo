@@ -3,4 +3,11 @@
   hosts: local  
   roles:
     - create-environments
+  tasks:
+    - include_role:
+      name: blockchain-setup  
+      vars:
+        project: "{{ product }}-{{ item.name }}"  
+        local: false
+      with_items: {{ environments }}    
 

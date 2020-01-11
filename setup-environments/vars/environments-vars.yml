@@ -1,0 +1,8 @@
+---
+# Project definition - add new libraries here
+environments:
+  - name: build
+  - name: test    
+  - name: prod   
+            
+    
