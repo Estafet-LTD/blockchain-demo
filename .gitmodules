@@ -28,3 +28,9 @@
 [submodule "estafet-blockchain-demo-commons-lib"]
 	path = estafet-blockchain-demo-commons-lib
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-commons-lib
+[submodule "estafet-blockchain-demo-blockchain-events-ms"]
+	path = estafet-blockchain-demo-blockchain-events-ms
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-blockchain-events-ms
+[submodule "estafet-blockchain-demo-blockchain-gateway-ms"]
+	path = estafet-blockchain-demo-blockchain-gateway-ms
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-blockchain-gateway-ms

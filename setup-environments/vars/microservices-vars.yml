@@ -16,13 +16,13 @@ microservices:
     expose: true  
     db: false
     ignore: false
-  - name: validator-gateway-ms
-    repo: estafet-blockchain-demo-validator-gateway-ms
+  - name: blockchain-gateway-ms
+    repo: estafet-blockchain-demo-blockchain-gateway-ms
     expose: false    
     db: false
     ignore: false
-  - name: validator-events-ms
-    repo: estafet-blockchain-demo-validator-events-ms
+  - name: blockchain-events-ms
+    repo: estafet-blockchain-demo-blockchain-events-ms
     expose: false    
     db: true    
     ignore: false
