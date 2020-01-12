@@ -4,9 +4,6 @@
 [submodule "estafet-blockchain-demo-currency-converter-ms"]
 	path = estafet-blockchain-demo-currency-converter-ms
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-currency-converter-ms
-[submodule "estafet-blockchain-demo-validator-gateway-ms"]
-	path = estafet-blockchain-demo-validator-gateway-ms
-	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-validator-gateway-ms
 [submodule "estafet-blockchain-demo-wallet-ms"]
 	path = estafet-blockchain-demo-wallet-ms
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-wallet-ms
@@ -31,6 +28,3 @@
 [submodule "estafet-blockchain-demo-commons-lib"]
 	path = estafet-blockchain-demo-commons-lib
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-commons-lib
-[submodule "estafet-blockchain-demo-validator-events-ms"]
-	path = estafet-blockchain-demo-validator-events-ms
-	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-validator-events-ms
