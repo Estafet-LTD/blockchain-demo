@@ -1,6 +1,13 @@
 ---
 - include_role: 
     name : init
+    
+- include_role: 
+    name: namespace-setup
+  vars:
+    local_project: "{{ project }}"
+    project_description: "{{ product_description }}"
+    cloud_environment: false
 
 - name: Switch to the project {{ project }}
   shell: 'oc project {{ project }}'

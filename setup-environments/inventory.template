@@ -17,3 +17,5 @@ password=developer
 
 # the number your project
 cloud_project=dq00
+
+rollout=true
