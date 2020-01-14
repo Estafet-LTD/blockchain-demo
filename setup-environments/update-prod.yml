@@ -3,10 +3,11 @@
   hosts: local
   tasks:
     - include_role:
-        name: prod-namespace-setup  
-    - include_role:
         name: blockchain-setup  
       vars:
         project: "{{ product }}-prod"  
-        local: false           
+        local: false       
+    - include_role:
+        name: prod-namespace-setup  
+    
   

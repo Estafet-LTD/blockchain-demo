@@ -38,7 +38,7 @@
     - openshift
 
 - name: Create the go ethereum application
-  shell: 'oc new-app ethereum/client-go~https://github.com/Estafet-LTD/go-ethereum.git -e RPC_VHOST=go-ethereum.{{ project }}.svc:8545 --strategy=docker -n {{ project }}'
+  shell: 'oc new-app ethereum/client-go~https://github.com/Estafet-LTD/go-ethereum.git -e RPC_VHOST=go-ethereum.{{ project }}.svc --strategy=docker -n {{ project }}'
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
