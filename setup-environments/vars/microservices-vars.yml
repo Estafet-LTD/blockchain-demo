@@ -5,17 +5,17 @@ microservices:
     repo: estafet-blockchain-demo-bank-ms
     expose: false
     db: true
-    ignore: true
+    ignore: false
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms
     expose: false 
     db: true
-    ignore: true
+    ignore: false
   - name: console-ui     
     repo: estafet-blockchain-demo-console-ui
     expose: true  
     db: false
-    ignore: true
+    ignore: false
   - name: blockchain-gateway-ms
     repo: estafet-blockchain-demo-blockchain-gateway-ms
     expose: false    
@@ -25,4 +25,4 @@ microservices:
     repo: estafet-blockchain-demo-wallet-ms
     expose: false
     db: true
-    ignore: true
+    ignore: false

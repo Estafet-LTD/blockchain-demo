@@ -1,7 +1,13 @@
 ---
 - name: Update Cloud Test Environment
   hosts: local 
-  tasks:          
+  tasks: 
+    - include_role:
+        name: blockchain-setup  
+      vars:
+        project: "{{ cloud_project }}"  
+        expose: false
+        local: false            
     - include_role:
         name: cloud-environment-setup    
       vars:
