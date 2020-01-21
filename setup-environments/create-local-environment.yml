@@ -5,12 +5,12 @@
     - include_role:
         name: blockchain-setup  
       vars:
-        project: microservices-scrum  
+        project: blockchain-demo  
         expose: true
         local: true  
     - include_role:
         name: local-environment-setup    
       vars:
         test: false
-        local_project: microservices-scrum
+        local_project: blockchain-demo
        

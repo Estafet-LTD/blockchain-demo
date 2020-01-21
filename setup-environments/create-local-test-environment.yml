@@ -7,12 +7,12 @@
         name: local-environment-setup    
       vars:
         test: true
-        local_project: microservices-scrum
+        local_project: blockchain-demo
         
     - include_role:
         name: blockchain-setup  
       vars:
-        project: microservices-scrum  
+        project: blockchain-demo  
         expose: true
         local: true        
 
