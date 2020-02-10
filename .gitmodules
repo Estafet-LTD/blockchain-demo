@@ -31,3 +31,6 @@
 [submodule "estafet-blockchain-demo-blockchain-gateway-ms"]
 	path = estafet-blockchain-demo-blockchain-gateway-ms
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-blockchain-gateway-ms
+[submodule "go-ethereum"]
+	path = go-ethereum
+	url = https://github.com/Estafet-LTD/go-ethereum
