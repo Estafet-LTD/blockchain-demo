@@ -19,3 +19,11 @@ password=developer
 cloud_project=dq00
 
 rollout=true
+
+# trello (cloud environment only) 
+trello_access_token=something_provided_by_trello
+trello_api_key=anotherthing_provided_by_trello
+
+# github (cloud environment only) 
+github_user=your_github_user
+github_password=your_github_security_token
