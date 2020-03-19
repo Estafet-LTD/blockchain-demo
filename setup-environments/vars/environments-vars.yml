@@ -1,8 +1,74 @@
 ---
-# Project definition - add new libraries here
+# Environments definition - add new environments here
 environments:
+
   - name: build
-  - name: test    
-  - name: prod   
-            
-    
+    display: Build
+    description: Build Environment
+    role: edit
+    jaeger: true
+    amq: true   
+    wiremock: true 
+    db: postgres
+    next: test
+    ext_roles:     
+      - name: blockchain-setup    
+       
+  - name: test
+    display: Test
+    description: Test Environment
+    role: edit
+    jaeger: true
+    amq: true   
+    wiremock: false  
+    db: postgres   
+    next: sit
+    ext_roles:     
+      - name: blockchain-setup    
+      
+  - name: sit
+    display: SIT
+    description: SIT Environment
+    role: view
+    jaeger: true
+    amq: true   
+    wiremock: false  
+    db: postgres   
+    next: uat
+    ext_roles:     
+      - name: blockchain-setup
+
+  - name: uat
+    display: UAT
+    description: UATT Environment
+    role: view
+    jaeger: true
+    amq: true   
+    wiremock: false  
+    db: postgres   
+    next: perf
+    ext_roles:     
+      - name: blockchain-setup
+
+  - name: perf
+    display: Performance
+    description: Performance Test Environment
+    role: view
+    jaeger: true
+    amq: true      
+    db: postgres
+    wiremock: false 
+    next: prod
+    ext_roles:     
+      - name: blockchain-setup  
+          
+  - name: prod
+    display: Production
+    description: Production Environment
+    jaeger: true
+    amq: false 
+    wiremock: false
+    db: postgres
+    next: end    
+    ext_roles:     
+      - name: blockchain-setup    
