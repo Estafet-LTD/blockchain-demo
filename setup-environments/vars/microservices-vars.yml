@@ -1,28 +1,49 @@
 ---
 # Project definition - add new microservices here
 microservices:
+
   - name: bank-ms
     repo: estafet-blockchain-demo-bank-ms
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
     db: true
     ignore: false
+    
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false 
     db: true
-    ignore: false
+    
   - name: console-ui     
     repo: estafet-blockchain-demo-console-ui
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile     
     expose: true  
     db: false
-    ignore: false
+    
   - name: blockchain-gateway-ms
     repo: estafet-blockchain-demo-blockchain-gateway-ms
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false    
     db: false
-    ignore: false
+    
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
     db: true
-    ignore: false

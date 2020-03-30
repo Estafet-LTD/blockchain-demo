@@ -1,74 +1,65 @@
 ---
 # Environments definition - add new environments here
+
 environments:
 
-  - name: build
-    display: Build
-    description: Build Environment
-    role: edit
-    jaeger: true
-    amq: true   
-    wiremock: true 
-    db: postgres
-    next: test
-    ext_roles:     
-      - name: blockchain-setup    
+  jaeger: true
+  db: postgres
+  amq: true
+  
+  ext_roles:     
+    - name: blockchain-setup
+  
+  stages:
+    - name: build
+      display: Build
+      description: Build Environment
+      role: edit   
+      wiremock: true 
+      next: test
        
-  - name: test
-    display: Test
-    description: Test Environment
-    role: edit
-    jaeger: true
-    amq: true   
-    wiremock: false  
-    db: postgres   
-    next: sit
-    ext_roles:     
-      - name: blockchain-setup    
-      
-  - name: sit
-    display: SIT
-    description: SIT Environment
-    role: view
-    jaeger: true
-    amq: true   
-    wiremock: false  
-    db: postgres   
-    next: uat
-    ext_roles:     
-      - name: blockchain-setup
-
-  - name: uat
-    display: UAT
-    description: UATT Environment
-    role: view
-    jaeger: true
-    amq: true   
-    wiremock: false  
-    db: postgres   
-    next: perf
-    ext_roles:     
-      - name: blockchain-setup
-
-  - name: perf
-    display: Performance
-    description: Performance Test Environment
-    role: view
-    jaeger: true
-    amq: true      
-    db: postgres
-    wiremock: false 
-    next: prod
-    ext_roles:     
-      - name: blockchain-setup  
-          
-  - name: prod
-    display: Production
-    description: Production Environment
-    jaeger: true
-    amq: false 
-    wiremock: false
-    db: postgres
-    next: end    
-    ext_roles:     
-      - name: blockchain-setup    
+    - name: test
+      display: Test
+      description: Test Environment
+      test_repo: estafet-blockchain-demo-qa
+      role: edit  
+      wiremock: false  
+      next: sit   
+        
+    - name: sit
+      display: SIT
+      description: SIT Environment
+      test_repo: estafet-blockchain-demo-qa
+      role: view
+      wiremock: false     
+      next: uat
+  
+    - name: uat
+      display: UAT
+      description: UAT Environment
+      role: view
+      wiremock: false   
+      next: perf
+  
+    - name: perf
+      display: Performance
+      description: Performance Test Environment
+      test_repo: estafet-blockchain-demo-qa
+      role: view
+      wiremock: false 
+      next: security 
+  
+    - name: security
+      display: Security
+      description: Security Test Environment
+      test_repo: estafet-blockchain-demo-qa
+      role: view 
+      wiremock: false 
+      next: prod  
+            
+    - name: prod
+      display: Production
+      description: Production Environment
+      test_repo: estafet-blockchain-demo-qa-prod
+      wiremock: false
+      next: end        
