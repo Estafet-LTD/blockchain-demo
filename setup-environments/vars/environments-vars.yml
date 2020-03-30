@@ -3,6 +3,7 @@
 
 environments:
 
+  repo: estafet-blockchain-demo
   jaeger: true
   db: postgres
   amq: true
