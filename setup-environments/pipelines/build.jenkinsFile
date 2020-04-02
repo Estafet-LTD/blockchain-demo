@@ -137,14 +137,6 @@ node("maven") {
 			}    		
 		}		
 	}
-
-	if (pipelines.build.promote[0]) {
-		stage("deploy snapshots") {
-			withMaven(mavenSettingsConfig: 'microservices-scrum') {
-		 		sh "mvn clean deploy -Dmaven.test.skip=true"
-			}    	
-		}			
-	}
 	
 	if (pipelines.build.promote[0]) {
 		stage("promote the image") {
