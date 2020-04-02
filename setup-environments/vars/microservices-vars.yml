@@ -10,7 +10,6 @@ microservices:
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
     db: true
-    ignore: false
     
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms

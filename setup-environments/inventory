@@ -1,0 +1,37 @@
+[local]
+localhost ansible_connection=local
+
+[local:vars]
+# The name of the github organisation
+github=Estafet-LTD 
+
+# openshift host and port
+# openshift host and port
+openshift_host=52.56.85.176.xip.io
+openshift_port=8443
+
+# openshift credentials 
+username=admin 
+password=estafet2051!
+
+# database host (only required for cloud environment) 
+database=blockchain-demo.cfzuhvugfmcm.eu-west-2.rds.amazonaws.com
+
+cloud_project=blockchain-demo-dq02
+
+# maven mirror (only for local environments)
+maven_mirror_url=http://nexus-nexus.3.10.158.121.xip.io/nexus/content/groups/public/
+
+# docker registry (only for local environments)
+docker_registry=172.30.1.1:5000
+
+# make this false if local environment fails after deploying pod
+rollout=true
+
+# trello (cloud environment only) 
+trello_access_token=b1419ea3fefc287f28b806dc25fe95481af1913830f7f2bab1f2293921fdf9e5
+trello_api_key=758701004f1c0b22b116f3d21624f396
+
+# github (cloud environment only) 
+github_user=dennyjoe
+github_password=5582a7d519a637353d60a448957d32a04e60f4af

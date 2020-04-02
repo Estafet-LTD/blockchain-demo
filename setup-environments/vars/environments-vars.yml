@@ -4,63 +4,102 @@
 environments:
 
   repo: estafet-blockchain-demo
-  jaeger: true
-  db: postgres
-  amq: true
-  
-  ext_roles:     
-    - name: blockchain-setup
-  
+
+  roles:
+    - name: couchbase-setup
+      project: "{{ product }}-couchbase"
+
+    - name: mq-namespace-setup
+      colour: blue    
+      amq_user: amq
+      amq_password: amq
+      templates_project: openshift
+
+  teardown_roles:
+    - name: delete-mq-namespace
+      colour: blue  
+    - name: delete-mq-namespace
+      colour: green  
+
   stages:
-    - name: build
-      display: Build
-      description: Build Environment
-      role: edit   
-      wiremock: true 
-      next: test
-       
-    - name: test
-      display: Test
-      description: Test Environment
-      test_repo: estafet-blockchain-demo-qa
-      role: edit  
-      wiremock: false  
-      next: sit   
-        
-    - name: sit
-      display: SIT
-      description: SIT Environment
-      test_repo: estafet-blockchain-demo-qa
-      role: view
-      wiremock: false     
-      next: uat
+  - name: build
+    display: Build
+    description: Build Environment
+    role: edit   
+    next: test
+    roles:
+    - name: jaeger-setup
+    - name: external-postgres-setup
+    - name: amq-setup    
+      amq_user: amq
+      amq_password: amq
+      templates_project: openshift
+    - name: wiremock-setup  
+      tag: 2.25.1
+      expose: false
+    ext_roles:     
+    - name: blockchain-setup
+      service_account: true
+
+  - name: test
+    display: Test
+    description: Test Environment
+    test_repo: estafet-blockchain-demo-qa
+    role: edit  
+    next: perf   
+    roles:
+    - name: jaeger-setup
+    - name: external-postgres-setup
+    - name: amq-setup    
+      amq_user: amq
+      amq_password: amq     
+      templates_project: openshift 
+    ext_roles:     
+    - name: blockchain-setup      
+      service_account: true
+
+  - name: perf
+    display: Performance
+    description: Performance Test Environment
+    test_repo: estafet-blockchain-demo-qa-perf
+    role: view
+    next: security 
+    roles:
+    - name: jaeger-setup
+    - name: external-postgres-setup
+    - name: amq-setup    
+      amq_user: amq
+      amq_password: amq      
+      templates_project: openshift
+    ext_roles:     
+    - name: blockchain-setup     
+      service_account: true
   
-    - name: uat
-      display: UAT
-      description: UAT Environment
-      role: view
-      wiremock: false   
-      next: perf
+  - name: security
+    display: Security
+    description: Security Test Environment
+    test_repo: estafet-blockchain-demo-qa-security
+    role: view 
+    next: prod  
+    roles:
+    - name: jaeger-setup
+    - name: external-postgres-setup
+    - name: amq-setup    
+      amq_user: amq
+      amq_password: amq      
+      templates_project: openshift
+    ext_roles:     
+    - name: blockchain-setup   
+      service_account: true
+                  
+  - name: prod
+    display: Production
+    description: Production Environment
+    test_repo: estafet-blockchain-demo-qa-prod
+    next: end    
+    roles:
+    - name: external-postgres-setup        
+    ext_roles:     
+    - name: blockchain-setup   
+      service_account: true
   
-    - name: perf
-      display: Performance
-      description: Performance Test Environment
-      test_repo: estafet-blockchain-demo-qa
-      role: view
-      wiremock: false 
-      next: security 
-  
-    - name: security
-      display: Security
-      description: Security Test Environment
-      test_repo: estafet-blockchain-demo-qa
-      role: view 
-      wiremock: false 
-      next: prod  
-            
-    - name: prod
-      display: Production
-      description: Production Environment
-      test_repo: estafet-blockchain-demo-qa-prod
-      wiremock: false
-      next: end        
