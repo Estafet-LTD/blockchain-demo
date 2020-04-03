@@ -13,4 +13,4 @@ workdir: ~/.estafet
 
 # Task Manager
 task_manager: trello
-task_manager_title: Trello
+task_manager_title: Trello Features
