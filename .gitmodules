@@ -34,3 +34,9 @@
 [submodule "go-ethereum"]
 	path = go-ethereum
 	url = https://github.com/Estafet-LTD/go-ethereum
+[submodule "estafet-blockchain-demo-qa-security"]
+	path = estafet-blockchain-demo-qa-security
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-security
+[submodule "estafet-blockchain-demo-qa-perf"]
+	path = estafet-blockchain-demo-qa-perf
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-perf
