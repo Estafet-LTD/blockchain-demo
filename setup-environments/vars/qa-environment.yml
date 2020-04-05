@@ -11,7 +11,7 @@ qa_environment:
 
   roles:
     - name: jaeger-setup
-    - name: external-postgres-setup
+    - name: postgres-setup
 
     - name: amq-setup    
       amq_user: amq

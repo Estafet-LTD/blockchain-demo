@@ -9,8 +9,12 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
-    db: true
-    
+    roles:
+      - name: create-postgres-db
+        app: bank-ms
+        repo: estafet-blockchain-demo-bank-ms
+        reset_db: true
+              
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms
     build: build.jenkinsFile
@@ -18,7 +22,11 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false 
-    db: true
+    roles:
+      - name: create-postgres-db
+        app: currency-converter-ms
+        repo: estafet-blockchain-demo-currency-converter-ms
+        reset_db: true
     
   - name: console-ui     
     repo: estafet-blockchain-demo-console-ui
@@ -27,8 +35,7 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: true  
-    db: false
-    
+          
   - name: blockchain-gateway-ms
     repo: estafet-blockchain-demo-blockchain-gateway-ms
     build: build.jenkinsFile
@@ -36,8 +43,7 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false    
-    db: false
-    
+
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
     build: build.jenkinsFile
@@ -45,4 +51,8 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
-    db: true
+    roles:
+      - name: create-postgres-db
+        app: wallet-ms
+        repo: estafet-blockchain-demo-wallet-ms
+        reset_db: true
