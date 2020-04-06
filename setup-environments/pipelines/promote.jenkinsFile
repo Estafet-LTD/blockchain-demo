@@ -76,7 +76,7 @@ def getLatestVersion(product, microservice) {
 	if (versions.size() == 0) {
 		error("There are no images for ${microservice}")
 	}
-	return "${recentVersion(versions)}-SNAPSHOT"
+	return "${recentVersion(versions)}"
 }
 
 node('maven') {
