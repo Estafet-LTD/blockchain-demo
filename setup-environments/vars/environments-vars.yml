@@ -98,6 +98,7 @@ environments:
       test_repo: estafet-blockchain-demo-qa-prod
       next: end    
       roles:
+        - name: jaeger-setup
         - name: external-postgres-setup        
       ext_roles:     
         - name: blockchain-setup   
