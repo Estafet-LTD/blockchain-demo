@@ -34,6 +34,17 @@ boolean dcexists(json, microservice) {
 	return false
 }
 
+@NonCPS
+def getTestStatus(json) {
+	return new groovy.json.JsonSlurper().parseText(json).metadata.labels."test-passed"
+}
+
+def testStatus(project) {
+	sh "oc get project ${project} -o json > test.json"
+	def test = readFile('test.json')
+	return getTestStatus(test)
+}
+
 boolean deploymentConfigExists(project, microservice) {
 	sh "oc get dc -o json -n ${project} > dc.json"
 	def dc = readFile('dc.json')
@@ -87,9 +98,7 @@ node('maven') {
 	}
 
 	stage ("determine the status of the ${params.PROJECT} environment") {
-		sh "oc get project ${params.PROJECT} -o json > test.json"
-		def test = readFile('test.json')
-		testStatus = getTestStatus(test)
+		testStatus = testStatus params.PROJECT
 		println "the ${params.PROJECT} environment test status is $testStatus"
 		if (testStatus.equals("false")) error("Cannot promote microservices to ${project} as they have not passed ${params.PROJECT} testing")
 	}
