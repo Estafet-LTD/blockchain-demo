@@ -11,7 +11,7 @@ developer_environment:
 
   roles:
     - name: jaeger-setup
-    - name: postgres-setup
+    - name: postgresql-setup
 
     - name: amq-setup    
       amq_user: amq
