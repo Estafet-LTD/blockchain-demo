@@ -6,6 +6,8 @@ environments:
   repo: estafet-blockchain-demo
 
   roles:
+    - name: nexus-setup  
+  
     - name: couchbase-setup
       project: "{{ product }}-couchbase"
 
@@ -37,7 +39,6 @@ environments:
         - name: wiremock-setup  
           tag: 2.25.1
           expose: false
-      ext_roles:     
         - name: blockchain-setup
           service_account: true
   
@@ -54,7 +55,6 @@ environments:
           amq_user: amq
           amq_password: amq     
           templates_project: openshift 
-      ext_roles:     
         - name: blockchain-setup      
           service_account: true
   
@@ -71,7 +71,6 @@ environments:
           amq_user: amq
           amq_password: amq      
           templates_project: openshift
-      ext_roles:     
         - name: blockchain-setup     
           service_account: true
     
@@ -88,7 +87,6 @@ environments:
           amq_user: amq
           amq_password: amq      
           templates_project: openshift
-      ext_roles:     
         - name: blockchain-setup   
           service_account: true
                     
@@ -100,7 +98,6 @@ environments:
       roles:
         - name: jaeger-setup
         - name: external-postgres-setup        
-      ext_roles:     
         - name: blockchain-setup   
           service_account: true
   

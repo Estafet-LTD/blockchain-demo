@@ -21,8 +21,7 @@ developer_environment:
     - name: wiremock-setup  
       tag: 2.25.1
       expose: false
-
-  ext_roles:     
+ 
     - name: blockchain-setup
       service_account: true
 
