@@ -17,6 +17,12 @@ environments:
       amq_password: amq
       templates_project: openshift
 
+    - name: mq-namespace-setup
+      colour: green    
+      amq_user: amq
+      amq_password: amq
+      templates_project: openshift
+
   teardown_roles:
     - name: delete-mq-namespace
       colour: blue  
