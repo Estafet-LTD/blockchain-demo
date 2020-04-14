@@ -5,7 +5,7 @@ environments:
 
   repo: estafet-blockchain-demo
 
-  roles:
+  setup:
     - name: nexus-setup  
   
     - name: couchbase-setup
@@ -23,7 +23,7 @@ environments:
       amq_password: amq
       templates_project: openshift
 
-  teardown_roles:
+  teardown:
     - name: delete-mq-namespace
       colour: blue  
     - name: delete-mq-namespace
@@ -35,7 +35,7 @@ environments:
       description: Build Environment
       role: edit   
       next: test
-      roles:
+      setup:
         - name: jaeger-setup
         - name: external-postgres-setup
         - name: amq-setup    
@@ -54,7 +54,7 @@ environments:
       test_repo: estafet-blockchain-demo-qa
       role: edit  
       next: perf   
-      roles:
+      setup:
         - name: jaeger-setup
         - name: external-postgres-setup
         - name: amq-setup    
@@ -70,7 +70,7 @@ environments:
       test_repo: estafet-blockchain-demo-qa-perf
       role: view
       next: security 
-      roles:
+      setup:
         - name: jaeger-setup
         - name: external-postgres-setup
         - name: amq-setup    
@@ -86,7 +86,7 @@ environments:
       test_repo: estafet-blockchain-demo-qa-security
       role: view 
       next: prod  
-      roles:
+      setup:
         - name: jaeger-setup
         - name: external-postgres-setup
         - name: amq-setup    
@@ -101,7 +101,7 @@ environments:
       description: Production Environment
       test_repo: estafet-blockchain-demo-qa-prod
       next: end    
-      roles:
+      setup:
         - name: jaeger-setup
         - name: external-postgres-setup        
         - name: blockchain-setup   
