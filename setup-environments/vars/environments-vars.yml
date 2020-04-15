@@ -6,10 +6,8 @@ environments:
   repo: estafet-blockchain-demo
 
   setup:
-    - name: nexus-setup  
-  
-    - name: couchbase-setup
-      project: "{{ product }}-couchbase"
+    - name: nexus-setup    
+    - name: github-webhook-setup
 
     - name: mq-namespace-setup
       colour: blue    
@@ -24,6 +22,7 @@ environments:
       templates_project: openshift
 
   teardown:
+    - name: github-webhook-teardown
     - name: delete-mq-namespace
       colour: blue  
     - name: delete-mq-namespace
