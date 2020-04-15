@@ -28,6 +28,9 @@ environments:
     - name: delete-mq-namespace
       colour: green  
 
+  monitoring:
+    - name: pgadmin-setup
+
   stages:
     - name: build
       display: Build
