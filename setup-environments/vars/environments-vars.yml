@@ -28,8 +28,12 @@ environments:
     - name: delete-mq-namespace
       colour: green  
 
+  databases:
+    - name: postgresql-setup
+
   monitoring:
     - name: pgadmin-setup
+    - name: jaeger-setup
 
   stages:
     - name: build
@@ -38,8 +42,6 @@ environments:
       role: edit   
       next: test
       setup:
-        - name: jaeger-setup
-        - name: external-postgres-setup
         - name: amq-setup    
           amq_user: amq
           amq_password: amq
@@ -57,8 +59,6 @@ environments:
       role: edit  
       next: perf   
       setup:
-        - name: jaeger-setup
-        - name: external-postgres-setup
         - name: amq-setup    
           amq_user: amq
           amq_password: amq     
@@ -73,8 +73,6 @@ environments:
       role: view
       next: security 
       setup:
-        - name: jaeger-setup
-        - name: external-postgres-setup
         - name: amq-setup    
           amq_user: amq
           amq_password: amq      
@@ -89,8 +87,6 @@ environments:
       role: view 
       next: prod  
       setup:
-        - name: jaeger-setup
-        - name: external-postgres-setup
         - name: amq-setup    
           amq_user: amq
           amq_password: amq      
@@ -103,9 +99,7 @@ environments:
       description: Production Environment
       test_repo: estafet-blockchain-demo-qa-prod
       next: end    
-      setup:
-        - name: jaeger-setup
-        - name: external-postgres-setup        
+      setup:    
         - name: blockchain-setup   
           service_account: true
   
