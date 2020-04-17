@@ -30,9 +30,9 @@ environments:
 
   databases:
     - name: postgresql-setup
+    - name: pgadmin-setup    
 
   monitoring:
-    - name: pgadmin-setup
     - name: jaeger-setup
 
   stages:

@@ -32,10 +32,12 @@ node("maven") {
 	])
 
 	def project = "${params.PRODUCT}-build"
+	def dbProject = "${params.PRODUCT}-database"
 	def microservice = params.MICROSERVICE	
 	def version
 	def pipelines
-
+	def resource
+	
 	currentBuild.description = "Build a container from the source, then execute unit and container integration tests before promoting the container as a release candidate for acceptance testing."
 
 	stage("checkout") {
@@ -52,15 +54,40 @@ node("maven") {
 		}
 	}
 
-	if (pipelines.build.restart[0] != null) {
-		stage("restart ${pipelines.build.restart[0]}") {
-			def service = pipelines.build.restart[0]
+	stage("remove the configuration map and secrets") {
+		sh "oc delete configmap ${microservice} -n ${project} || true"
+		sh "oc delete secret ${microservice} -n ${project} || true"	
+	}
+
+	stage("create the configuration map") {
+		def yml = readYaml file: "openshift/config/build-config.yml"
+		def configMap = yml.config_map
+		def mapStr = ""
+		configMap.each { config ->
+			mapStr = "${mapStr} --from-literal=${config.name}=${config.value}"
+		}
+		sh "oc create configmap ${microservice} ${mapStr}"
+	}
+
+	stage("create the secrets") {
+		def yml = readYaml file: "openshift/config/build-secret.yml"
+		def secret = yml.secrets
+		def mapStr = ""
+		secrets.each { secret ->
+			mapStr = "${mapStr} --from-literal=${secret.name}=${secret.value}"
+		}
+		sh "oc create secret generic ${microservice} ${mapStr}"
+	}
+
+	if (pipelines.build.restart != null) {
+		stage("restart ${pipelines.build.restart}") {
+			def service = pipelines.build.restart
 			openshiftDeploy namespace: project, depCfg: service
 			openshiftVerifyDeployment namespace: project, depCfg: service, replicaCount:"1", verifyReplicaCount: "true", waitTime: "300000"    	
 		}		
 	}
 
-	if (pipelines.build.wiremock[0]) {
+	if (pipelines.build.wiremock) {
 		stage("update wiremock") {
 			def files = findFiles(glob: 'src/integration-test/resources/*.json')
 			files.each { file -> 
@@ -70,7 +97,7 @@ node("maven") {
 		}		
 	}
 
-	if (pipelines.build.tests[0]) {
+	if (pipelines.build.tests) {
 		stage("unit tests") {
 			withMaven(mavenSettingsConfig: 'microservices-scrum') {
 		     sh "mvn clean test"
@@ -78,15 +105,15 @@ node("maven") {
 		}		
 	}
 	
-	if (pipelines.build.db[0]) {
+	if (pipelines.build.db) {
 		stage("prepare the database") {
 			withMaven(mavenSettingsConfig: 'microservices-scrum') {
-				sh "mvn clean package -P prepare-db -Dmaven.test.skip=true -Dproject=${project}"
+				sh "mvn clean package -P prepare-db -Dmaven.test.skip=true -Dproject=${project} -Ddb.project=${dbProject}"
 			}     	
 		}		
 	}
 	
-	if (pipelines.build.mq[0]) {
+	if (pipelines.build.mq) {
 		stage("reset a-mq to purge topics") {
 			openshiftDeploy namespace: project, depCfg: "broker-amq"
 			openshiftVerifyDeployment namespace: project, depCfg: "broker-amq", replicaCount:"1", verifyReplicaCount: "true", waitTime: "300000"    	
@@ -108,11 +135,19 @@ node("maven") {
 		openshiftVerifyBuild namespace: project, buildConfig: microservice, waitTime: "300000" 
 	}
 
+	stage("read the resource definition") {
+		if (fileExists("openshift/config/build-resources.yml")) {
+			resources = readYaml file: "openshift/config/build-resources.yml"
+		} else {
+			resources = readYaml file: "openshift/config/default-resources.yml"
+		}
+	}
+
 	stage("create deployment config") {
-		sh "oc process -n ${project} -f openshift/templates/${microservice}-config.yml -p NAMESPACE=${project} -p DOCKER_NAMESPACE=${project} -p DOCKER_IMAGE_LABEL=latest -p PRODUCT=${params.PRODUCT} | oc apply -f -"
-		if (pipelines.build.wiremock[0]) {
+		sh "oc process -n ${project} -f openshift/templates/${microservice}-config.yml -p NAMESPACE=${project} -p DOCKER_NAMESPACE=${project} -p DOCKER_IMAGE_LABEL=latest -p PRODUCT=${params.PRODUCT} -p MAX_MEMORY=${resources.max_memory} -p MIN_MEMORY=${resources.min_memory} -p MAX_CPU=${resources.max_cpu} -p MIN_CPU=${resources.min_cpu} -p REPLICAS=${resources.replicas} | oc apply -f -"
+		if (pipelines.build.wiremock) {
 			def envVars = ""
-			pipelines.build.wiremock_environment_variables[0].each {
+			pipelines.build.wiremock_environment_variables.each {
 				envVars = "${envVars} ${it['name']}=${it['value']}"
 			}
 			sh "oc set env dc/${microservice} ${envVars} -n ${project}"	
@@ -124,13 +159,13 @@ node("maven") {
 		openshiftVerifyDeployment namespace: project, depCfg: microservice, replicaCount:"1", verifyReplicaCount: "true", waitTime: "300000" 
 	}
 
-	if (pipelines.build.tests[0]) {
+	if (pipelines.build.tests) {
 		stage("execute the container tests") {
 			withMaven(mavenSettingsConfig: 'microservices-scrum') {
 				try {
 					sh "mvn clean verify -P integration-test"
 				} finally {
-					if (pipelines.build.mq[0]) {
+					if (pipelines.build.mq) {
 						sh "oc set env dc/${microservice} JBOSS_A_MQ_BROKER_URL=tcp://localhost:61616 -n ${project}"	
 					}
 				}
@@ -138,7 +173,7 @@ node("maven") {
 		}		
 	}
 	
-	if (pipelines.build.promote[0]) {
+	if (pipelines.build.promote) {
 		stage("promote the image to cicd") {
 			openshiftTag namespace: project, srcStream: microservice, srcTag: "latest", destinationNamespace: "${params.PRODUCT}-cicd", destinationStream: microservice, destinationTag: version
 			sh "oc patch is/${microservice} -p '{\"metadata\":{\"labels\":{\"product\":\"${params.PRODUCT}\"}}}' -n ${params.PRODUCT}-cicd"
