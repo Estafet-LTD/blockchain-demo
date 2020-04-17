@@ -66,7 +66,7 @@ node("maven") {
 		configMap.each { config ->
 			mapStr = "${mapStr} --from-literal=${config.name}=${config.value}"
 		}
-		sh "oc create configmap ${microservice} ${mapStr}"
+		sh "oc create configmap ${microservice} ${mapStr} -n ${project}"
 	}
 
 	stage("create the secrets") {
@@ -76,7 +76,7 @@ node("maven") {
 		secrets.each { secret ->
 			mapStr = "${mapStr} --from-literal=${secret.name}=${secret.value}"
 		}
-		sh "oc create secret generic ${microservice} ${mapStr}"
+		sh "oc create secret generic ${microservice} ${mapStr} -n ${project}"
 	}
 
 	if (pipelines.build.restart != null) {
