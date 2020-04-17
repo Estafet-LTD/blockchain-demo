@@ -71,7 +71,7 @@ node("maven") {
 
 	stage("create the secrets") {
 		def yml = readYaml file: "openshift/config/build-secret.yml"
-		def secret = yml.secrets
+		def secrets = yml.secrets
 		def mapStr = ""
 		secrets.each { secret ->
 			mapStr = "${mapStr} --from-literal=${secret.name}=${secret.value}"
