@@ -36,7 +36,7 @@ node("maven") {
 	def microservice = params.MICROSERVICE	
 	def version
 	def pipelines
-	def resource
+	def resources
 	
 	currentBuild.description = "Build a container from the source, then execute unit and container integration tests before promoting the container as a release candidate for acceptance testing."
 
@@ -137,9 +137,11 @@ node("maven") {
 
 	stage("read the resource definition") {
 		if (fileExists("openshift/config/build-resources.yml")) {
-			resources = readYaml file: "openshift/config/build-resources.yml"
+			def yml = readYaml file: "openshift/config/build-resources.yml"
+			resources = yml.resources
 		} else {
-			resources = readYaml file: "openshift/config/default-resources.yml"
+			def yml = readYaml file: "openshift/config/default-resources.yml"
+			resources = yml.resources
 		}
 	}
 
