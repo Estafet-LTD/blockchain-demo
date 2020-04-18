@@ -60,7 +60,7 @@ node("maven") {
 	}
 
 	stage("create the configuration map") {
-		def yml = readYaml file: "openshift/config/build-config.yml"
+		def yml = readYaml file: "openshift/configuration/build-config.yml"
 		def configMap = yml.config_map
 		def mapStr = ""
 		configMap.each { config ->
@@ -70,7 +70,7 @@ node("maven") {
 	}
 
 	stage("create the secrets") {
-		def yml = readYaml file: "openshift/config/build-secret.yml"
+		def yml = readYaml file: "openshift/configuration/build-secret.yml"
 		def secrets = yml.secrets
 		def mapStr = ""
 		secrets.each { secret ->
@@ -136,17 +136,17 @@ node("maven") {
 	}
 
 	stage("read the resource definition") {
-		if (fileExists("openshift/config/build-resources.yml")) {
-			def yml = readYaml file: "openshift/config/build-resources.yml"
+		if (fileExists("openshift/configuration/build-resources.yml")) {
+			def yml = readYaml file: "openshift/configuration/build-resources.yml"
 			resources = yml.resources
 		} else {
-			def yml = readYaml file: "openshift/config/default-resources.yml"
+			def yml = readYaml file: "openshift/configuration/default-resources.yml"
 			resources = yml.resources
 		}
 	}
 
 	stage("create deployment config") {
-		sh "oc process -n ${project} -f openshift/templates/${microservice}-config.yml -p NAMESPACE=${project} -p DOCKER_NAMESPACE=${project} -p DOCKER_IMAGE_LABEL=latest -p PRODUCT=${params.PRODUCT} -p MAX_MEMORY='${resources.max_memory}' -p MIN_MEMORY='${resources.min_memory}' -p MAX_CPU='${resources.max_cpu}' -p MIN_CPU='${resources.min_cpu}' -p REPLICAS='${resources.replicas}' | oc apply -f -"
+		sh "oc process -n ${project} -f openshift/templates/${microservice}-config.yml -p NAMESPACE=${project} -p DOCKER_NAMESPACE=${project} -p DOCKER_IMAGE_LABEL=latest -p PRODUCT=${params.PRODUCT} -p MAX_MEMORY=${resources.max_memory} -p MIN_MEMORY=${resources.min_memory} -p MAX_CPU=${resources.max_cpu} -p MIN_CPU=${resources.min_cpu} -p REPLICAS=${resources.replicas} | oc apply -f -"
 		if (pipelines.build.wiremock) {
 			def envVars = ""
 			pipelines.build.wiremock_environment_variables.each {
@@ -183,4 +183,3 @@ node("maven") {
 	}
 
 }
-
