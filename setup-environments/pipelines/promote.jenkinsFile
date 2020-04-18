@@ -162,7 +162,7 @@ node('maven') {
 		sh "oc label namespace ${project} test-passed=false --overwrite=true"	
 	}
 
-	if (pipelines.release.db[0]) {
+	if (pipelines.release.db) {
 		stage("prepare the database") {
 			withMaven(mavenSettingsConfig: 'microservices-scrum') {
 		      sh "mvn clean package -P prepare-db -Dmaven.test.skip=true -Dproject=${project} -Ddb.project=${dbProject}"

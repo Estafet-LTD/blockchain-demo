@@ -162,7 +162,7 @@ node("maven") {
 		sh "oc create secret generic ${env}${microservice} ${mapStr} -n ${project}"
 	}
 
-	if (pipelines.promote.db[0]) {
+	if (pipelines.promote.db) {
 		stage("ensure the database exists") {
 			withMaven(mavenSettingsConfig: 'microservices-scrum') {
 		      sh "mvn clean package -P create-prod-db -Dmaven.test.skip=true -Dproject=${project} -Ddb.project=${dbProject}"
