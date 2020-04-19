@@ -74,6 +74,7 @@ node('maven') {
 	def product = params.PRODUCT
 	def microservice = params.MICROSERVICE	
 	def dbProject = "${params.PRODUCT}-database" 
+	def label = project.substring(product.length()+1)
 
 	String version
 	def pipelines
@@ -114,7 +115,6 @@ node('maven') {
 	}
 
 	stage("create the configuration map") {
-		def label = project.substring(product.length()+1)
 		def yml = readYaml file: "openshift/configuration/${label}-config.yml"
 		def configMap = yml.config_map
 		def mapStr = ""
@@ -125,7 +125,6 @@ node('maven') {
 	}
 
 	stage("create the secrets") {
-		def label = project.substring(product.length()+1)
 		def yml = readYaml file: "openshift/configuration/${label}-secret.yml"
 		def secrets = yml.secrets
 		def mapStr = ""
@@ -148,7 +147,6 @@ node('maven') {
 	}		
 
 	stage("read the resource definition") {
-		def label = project.subString(product.length()+1)
 		if (fileExists("openshift/configuration/${label}-resources.yml")) {
 			def yml = readYaml file: "openshift/configuration/${label}-resources.yml"
 			resources = yml.resources
