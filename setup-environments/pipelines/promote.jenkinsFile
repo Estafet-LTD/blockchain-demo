@@ -126,14 +126,16 @@ node('maven') {
 		sh "oc create configmap ${microservice} ${mapStr} -n ${project}"
 	}
 
-	stage("create the secrets") {
-		def yml = readYaml file: "openshift/configuration/${label}-secret.yml"
-		def secrets = yml.secrets
-		def mapStr = ""
-		secrets.each { secret ->
-			mapStr = "${mapStr} --from-literal=${secret.name}=${secret.value}"
+	if (fileExists("openshift/configuration/${label}-secret.yml")) {
+		stage("create the secrets") {
+			def yml = readYaml file: "openshift/configuration/${label}-secret.yml"
+			def secrets = yml.secrets
+			def mapStr = ""
+			secrets.each { secret ->
+				mapStr = "${mapStr} --from-literal=${secret.name}=${secret.value}"
+			}
+			sh "oc create secret generic ${microservice} ${mapStr} -n ${project}"
 		}
-		sh "oc create secret generic ${microservice} ${mapStr} -n ${project}"
 	}
 
 	stage("reset test flags for ${project}") {
