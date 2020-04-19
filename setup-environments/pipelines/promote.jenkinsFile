@@ -114,7 +114,7 @@ node('maven') {
 	}
 
 	stage("create the configuration map") {
-		def label = project.subString(product.length()+1)
+		def label = project.substring(product.length()+1)
 		def yml = readYaml file: "openshift/configuration/${label}-config.yml"
 		def configMap = yml.config_map
 		def mapStr = ""
