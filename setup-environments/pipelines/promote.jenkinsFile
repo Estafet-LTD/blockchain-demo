@@ -74,7 +74,7 @@ node('maven') {
 	def product = params.PRODUCT
 	def microservice = params.MICROSERVICE	
 	def dbProject = "${params.PRODUCT}-database" 
-	def label = project.substring(product.length()+1)
+	def label
 
 	String version
 	def pipelines
@@ -95,7 +95,9 @@ node('maven') {
 
 	stage("determine the environment to promote to") {
 		project = nextProject prevProject
+		label = project.substring(product.length()+1)
 		println "the promotion project is ${project}"
+		println "the label ${label}"
 	}
 
 	stage("determine which image is to be deployed") {
