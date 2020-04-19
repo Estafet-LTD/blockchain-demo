@@ -48,13 +48,8 @@ node("maven") {
 		pipelines = readYaml file: "openshift/pipelines/pipelines.yml"
 	}
 
-	stage("remove the previous deployment") {
-		if (deploymentConfigExists(project, microservice)) {
-			sh "oc delete dc ${microservice} -n ${project}"	
-		}
-	}
-
-	stage("remove the configuration map and secrets") {
+	stage("remove the deployment, configuration map and secrets") {
+		sh "oc delete dc ${microservice} -n ${project} || true"	
 		sh "oc delete configmap ${microservice} -n ${project} || true"
 		sh "oc delete secret ${microservice} -n ${project} || true"	
 	}

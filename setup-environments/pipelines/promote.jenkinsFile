@@ -23,18 +23,6 @@ def recentVersion(List versions) {
 }
 
 @NonCPS
-boolean dcexists(json, microservice) {
-	def items = new groovy.json.JsonSlurper().parseText(json).items
-	for (int i = 0; i < items.size(); i++) {
-		def name = items[i]['metadata']['name']
-		if (name.equals(microservice)) {
-			return true;
-		}
-	}
-	return false
-}
-
-@NonCPS
 def getTestStatus(json) {
 	return new groovy.json.JsonSlurper().parseText(json).metadata.labels."test-passed"
 }
@@ -43,12 +31,6 @@ def testStatus(project) {
 	sh "oc get project ${project} -o json > test.json"
 	def test = readFile('test.json')
 	return getTestStatus(test)
-}
-
-boolean deploymentConfigExists(project, microservice) {
-	sh "oc get dc -o json -n ${project} > dc.json"
-	def dc = readFile('dc.json')
-	return dcexists(dc, microservice)
 }
 
 def nextProject(project) {
@@ -125,19 +107,14 @@ node('maven') {
 		sh "oc patch is/${microservice} -p '{\"metadata\":{\"labels\":{\"product\":\"${product}\"}}}' -n ${project}"
 	}
 
-	stage("remove the previous deployment") {
-		if (deploymentConfigExists(project, microservice)) {
-			sh "oc delete dc ${microservice} -n ${project}"	
-		}
-	}		
-
-	stage("remove the configuration map and secrets") {
+	stage("remove the deployment, configuration map and secrets") {
+		sh "oc delete dc ${microservice} -n ${project} || true"	
 		sh "oc delete configmap ${microservice} -n ${project} || true"
 		sh "oc delete secret ${microservice} -n ${project} || true"	
 	}
 
 	stage("create the configuration map") {
-		def label = project.subString(product.length+1)
+		def label = project.subString(product.length()+1)
 		def yml = readYaml file: "openshift/configuration/${label}-config.yml"
 		def configMap = yml.config_map
 		def mapStr = ""
@@ -148,7 +125,7 @@ node('maven') {
 	}
 
 	stage("create the secrets") {
-		def label = project.subString(product.length+1)
+		def label = project.subString(product.length()+1)
 		def yml = readYaml file: "openshift/configuration/${label}-secret.yml"
 		def secrets = yml.secrets
 		def mapStr = ""
@@ -171,7 +148,7 @@ node('maven') {
 	}		
 
 	stage("read the resource definition") {
-		def label = project.subString(product.length+1)
+		def label = project.subString(product.length()+1)
 		if (fileExists("openshift/configuration/${label}-resources.yml")) {
 			def yml = readYaml file: "openshift/configuration/${label}-resources.yml"
 			resources = yml.resources
