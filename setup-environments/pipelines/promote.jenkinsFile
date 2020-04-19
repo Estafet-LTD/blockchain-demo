@@ -125,7 +125,7 @@ node('maven') {
 	}
 
 	stage("create the secrets") {
-		def label = project.subString(product.length()+1)
+		def label = project.substring(product.length()+1)
 		def yml = readYaml file: "openshift/configuration/${label}-secret.yml"
 		def secrets = yml.secrets
 		def mapStr = ""
