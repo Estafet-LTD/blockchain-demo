@@ -9,7 +9,6 @@
 
 - name: Create the service account
   shell: 'oc create serviceaccount useroot -n {{ project }}'
-  when: params.service_account
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
@@ -18,7 +17,6 @@
 
 - name: Bind the service account to anyuid
   shell: 'oc adm policy add-scc-to-user anyuid -z useroot'
-  when: params.service_account
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
