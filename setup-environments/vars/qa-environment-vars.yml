@@ -18,10 +18,6 @@ qa_environment:
       amq_password: amq
       templates_project: openshift
 
-    - name: wiremock-setup  
-      tag: 2.25.1
-      expose: false
-    
     - name: blockchain-setup
       service_account: true
 

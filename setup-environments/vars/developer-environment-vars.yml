@@ -3,7 +3,6 @@
 
 developer_environment:
 
-  description: DEV Environment
   test: false
 
   maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
