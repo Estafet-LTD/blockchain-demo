@@ -10,7 +10,7 @@ developer_environment:
 
   setup:
     - name: jaeger-setup
-    - name: postgresql-setup
+    - name: couchbase-setup
 
     - name: amq-setup    
       amq_user: amq
