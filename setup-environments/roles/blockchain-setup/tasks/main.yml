@@ -1,10 +1,4 @@
 ---
-- include_role: 
-    name: namespace-setup
-  vars:
-    local_project: "{{ project }}"
-    project_description: "{{ product_description }}"
-
 - name: Switch to the project {{ project }}
   shell: 'oc project {{ project }}'
   register: command_result
@@ -48,7 +42,7 @@
     - openshift   
 
 - name: Wait for go-ethereum to become available
-  shell : "oc rollout status dc/go-ethereum"
+  shell : "oc rollout status dc/go-ethereum  -n {{ project }}"
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
