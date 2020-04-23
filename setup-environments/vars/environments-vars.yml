@@ -29,14 +29,7 @@ environments:
       colour: green  
 
   databases:
-    - name: postgresql-setup
-      environment_variables:
-        - name: POSTGRESQL_MAX_CONNECTIONS
-          value: 500
-      template_variables:
-        - name: VOLUME_CAPACITY
-          value: 3Gi
-    - name: pgadmin-setup    
+    - name: couchbase-setup
 
   monitoring:
     - name: jaeger-setup
