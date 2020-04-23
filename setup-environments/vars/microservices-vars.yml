@@ -2,36 +2,6 @@
 # Project definition - add new microservices here
 microservices:
 
-  - name: bank-ms
-    repo: estafet-blockchain-demo-bank-ms
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
-    expose: false
-    setup:
-      - name: create-postgres-db
-        app: bank-ms
-        repo: estafet-blockchain-demo-bank-ms
-        reset_db: true
-      - name: create-couchbase-bucket
-        bucket: "bank-ms"
-        
-  - name: currency-converter-ms
-    repo: estafet-blockchain-demo-currency-converter-ms
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
-    expose: false 
-    setup:
-      - name: create-postgres-db
-        app: currency-converter-ms
-        repo: estafet-blockchain-demo-currency-converter-ms
-        reset_db: true
-      - name: create-couchbase-bucket
-        bucket: "currency-converter-ms"        
-    
   - name: console-ui     
     repo: estafet-blockchain-demo-console-ui
     build: build.jenkinsFile
@@ -58,4 +28,31 @@ microservices:
     expose: false
     setup:
       - name: create-couchbase-bucket
-        bucket: "wallet-ms"         
+        bucket: wallet-ms      
+        bucket_password: welcome1   
+
+  - name: bank-ms
+    repo: estafet-blockchain-demo-bank-ms
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile     
+    expose: false
+    setup:
+      - name: create-couchbase-bucket
+        bucket: bank-ms
+        bucket_password: welcome1
+        
+  - name: currency-converter-ms
+    repo: estafet-blockchain-demo-currency-converter-ms
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile     
+    expose: false 
+    setup:
+      - name: create-couchbase-bucket
+        bucket: currency-converter-ms        
+        bucket_password: welcome1
+
+
