@@ -49,7 +49,6 @@ environments:
           tag: 2.25.1
           expose: false
         - name: blockchain-setup
-          service_account: true
   
     - name: test
       display: Test
@@ -77,7 +76,6 @@ environments:
           amq_password: amq      
           templates_project: openshift
         - name: blockchain-setup     
-          service_account: true
     
     - name: security
       display: Security
@@ -91,7 +89,6 @@ environments:
           amq_password: amq      
           templates_project: openshift
         - name: blockchain-setup   
-          service_account: true
                     
     - name: prod
       display: Production
@@ -100,5 +97,4 @@ environments:
       next: end    
       setup:    
         - name: blockchain-setup   
-          service_account: true
   

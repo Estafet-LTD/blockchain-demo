@@ -3,7 +3,6 @@
 
 qa_environment:
 
-  description: QA Environment
   test: true
 
   maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
