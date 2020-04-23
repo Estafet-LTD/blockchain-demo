@@ -10,8 +10,10 @@ developer_environment:
 
   setup:
     - name: jaeger-setup
-    - name: postgresql-setup
+    - name: blockchain-setup
+    
     - name: couchbase-setup
+      expose: true
 
     - name: amq-setup    
       amq_user: amq
@@ -21,6 +23,3 @@ developer_environment:
     - name: wiremock-setup  
       tag: 2.25.1
       expose: false
- 
-    - name: blockchain-setup
-

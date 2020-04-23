@@ -11,13 +11,12 @@ qa_environment:
 
   setup:
     - name: jaeger-setup
-    - name: postgresql-setup
+    - name: blockchain-setup
+    
+    - name: couchbase-setup
+      expose: true
 
     - name: amq-setup    
       amq_user: amq
       amq_password: amq
       templates_project: openshift
-
-    - name: blockchain-setup
-      service_account: true
-
