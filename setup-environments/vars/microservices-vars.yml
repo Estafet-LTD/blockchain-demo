@@ -14,6 +14,8 @@ microservices:
         app: bank-ms
         repo: estafet-blockchain-demo-bank-ms
         reset_db: true
+      - name: create-couchbase-bucket
+        bucket: "{{ project }}-bank-ms"
               
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms
@@ -27,6 +29,8 @@ microservices:
         app: currency-converter-ms
         repo: estafet-blockchain-demo-currency-converter-ms
         reset_db: true
+      - name: create-couchbase-bucket
+        bucket: "{{ project }}-currency-converter-ms"
     
   - name: console-ui     
     repo: estafet-blockchain-demo-console-ui
@@ -56,3 +60,5 @@ microservices:
         app: wallet-ms
         repo: estafet-blockchain-demo-wallet-ms
         reset_db: true
+      - name: create-couchbase-bucket
+        bucket: "{{ project }}-wallet-ms"
