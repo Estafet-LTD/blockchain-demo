@@ -50,15 +50,12 @@ microservices:
 
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
+    branch: feature/couchbase-wallet-ms
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
     setup:
-      - name: create-postgres-db
-        app: wallet-ms
-        repo: estafet-blockchain-demo-wallet-ms
-        reset_db: true
       - name: create-couchbase-bucket
         bucket: "wallet-ms"         
