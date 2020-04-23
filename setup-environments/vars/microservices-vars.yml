@@ -16,7 +16,7 @@ microservices:
         reset_db: true
       - name: create-couchbase-bucket
         bucket: "bank-ms"
-              
+        
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms
     build: build.jenkinsFile
