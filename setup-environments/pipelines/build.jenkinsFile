@@ -6,8 +6,10 @@ def getVersion(pom) {
 
 def getValue(name, configs) {
 	println "looking for ${name}"
+	println name.getClass()
 	configs.each { config ->
 		println config.name
+		println config.name.getClass()
 		if (name.equals(config.name)) {
 			return config.value
 		}
@@ -101,7 +103,7 @@ node("maven") {
 			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
 			def body = "name=${project}-${microservice}&ramQuotaMB=100&authType=sasl&bucketType=couchbase&saslPassword=${saslPassword}"
 			println body
-			httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets", httpMode: "POST", validResponseCodes: "202", requestBody: body
+			httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets", httpMode: "POST", requestBody: body
 		}		
 	}
 	
