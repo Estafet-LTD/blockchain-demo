@@ -5,7 +5,9 @@ def getVersion(pom) {
 }
 
 def getValue(name, configs) {
+	println "looking for ${name}"
 	configs.each { config ->
+		println config.name
 		if (name.equals(config.name)) {
 			return config.value
 		}
@@ -97,7 +99,7 @@ node("maven") {
 		stage("prepare the database") {
 			def yml = readYaml file: "openshift/configuration/build-secret.yml"
 			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
-			def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
+			def body = "name=${project}-${microservice}&ramQuotaMB=100&authType=sasl&bucketType=couchbase&saslPassword=${saslPassword}"
 			println body
 			httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets", httpMode: "POST", validResponseCodes: "202", requestBody: body
 		}		
