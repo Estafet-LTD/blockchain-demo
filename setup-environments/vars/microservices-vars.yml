@@ -4,6 +4,7 @@ microservices:
 
   - name: console-ui
     repo: estafet-blockchain-demo-console-ui
+    branch: feature/couchbase-console-ui
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
