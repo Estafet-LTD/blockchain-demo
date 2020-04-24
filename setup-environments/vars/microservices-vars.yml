@@ -33,6 +33,7 @@ microservices:
 
   - name: bank-ms
     repo: estafet-blockchain-demo-bank-ms
+    branch: feature/couchbase-bank-ms
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
