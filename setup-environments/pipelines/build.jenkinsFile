@@ -4,6 +4,15 @@ def getVersion(pom) {
 	return "${matcher[0][1]}${matcher[0][2].toInteger()}-SNAPSHOT"
 }
 
+def getValue(name, configs) {
+	configs.each { config ->
+		if (name.equals(config.name)) {
+			return config.value
+		}
+	}
+	return null
+}
+
 node("maven") {
 
 	properties([
@@ -86,9 +95,9 @@ node("maven") {
 	
 	if (pipelines.build.db) {
 		stage("prepare the database") {
-			withMaven(mavenSettingsConfig: 'microservices-scrum') {
-				sh "mvn clean package -P prepare-db -Dmaven.test.skip=true -Dproject=${project} -Ddb.project=${dbProject}"
-			}     	
+			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
+			def body = "-d 'name=${project}-${microservice}' -d 'ramQuotaMB=100' -d 'authType=sasl' -d 'bucketType=couchbase' -d 'saslPassword=${saslPassword}'"
+			httpRequest url: "http://couchbase.${params.PRODUCT}-database.svc:/pools/default/buckets", httpMode: "POST", validResponseCodes: "202", requestBody: body
 		}		
 	}
 	
