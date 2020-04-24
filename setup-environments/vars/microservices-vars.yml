@@ -16,7 +16,20 @@ microservices:
     release: release.jenkinsFile
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
-    expose: false    
+    expose: false
+
+  - name: currency-converter-ms
+    repo: estafet-blockchain-demo-currency-converter-ms
+    branch: feature/couchbase-currency-converter-ms
+    build: build.jenkinsFile
+    release: release.jenkinsFile
+    promote: promote.jenkinsFile
+    promote_to_prod: promote-to-prod.jenkinsFile
+    expose: false
+    setup:
+      - name: create-couchbase-bucket
+        bucket: currency-converter-ms
+        bucket_password: welcome1
 
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
@@ -43,18 +56,4 @@ microservices:
       - name: create-couchbase-bucket
         bucket: bank-ms
         bucket_password: welcome1
-        
-  - name: currency-converter-ms
-    repo: estafet-blockchain-demo-currency-converter-ms
-    branch: feature/couchbase-currency-converter-ms
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
-    expose: false 
-    setup:
-      - name: create-couchbase-bucket
-        bucket: currency-converter-ms        
-        bucket_password: welcome1
-
 
