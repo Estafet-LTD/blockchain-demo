@@ -46,7 +46,7 @@ microservices:
         
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms
-    branch: feature/couchbase-wallet-ms
+    branch: feature/couchbase-currency-converter-ms
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
