@@ -2,20 +2,20 @@
 # Project definition - add new microservices here
 microservices:
 
-  - name: console-ui     
+  - name: console-ui
     repo: estafet-blockchain-demo-console-ui
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
-    expose: true  
-          
+    promote_to_prod: promote-to-prod.jenkinsFile
+    expose: true
+
   - name: blockchain-gateway-ms
     repo: estafet-blockchain-demo-blockchain-gateway-ms
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    promote_to_prod: promote-to-prod.jenkinsFile
     expose: false
 
   - name: currency-converter-ms
@@ -29,7 +29,7 @@ microservices:
     setup:
       - name: create-couchbase-bucket
         bucket: currency-converter-ms
-        bucket_password: welcome1   
+        bucket_password: welcome1
 
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
@@ -37,11 +37,11 @@ microservices:
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    promote_to_prod: promote-to-prod.jenkinsFile
     expose: false
     setup:
       - name: create-couchbase-bucket
-        bucket: wallet-ms      
+        bucket: wallet-ms
         bucket_password: welcome1
 
   - name: bank-ms
@@ -50,7 +50,7 @@ microservices:
     build: build.jenkinsFile
     release: release.jenkinsFile
     promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    promote_to_prod: promote-to-prod.jenkinsFile
     expose: false
     setup:
       - name: create-couchbase-bucket
