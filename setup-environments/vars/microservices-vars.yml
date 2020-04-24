@@ -29,7 +29,7 @@ microservices:
     setup:
       - name: create-couchbase-bucket
         bucket: currency-converter-ms
-        bucket_password: welcome1
+        bucket_password: welcome1   
 
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
@@ -42,7 +42,7 @@ microservices:
     setup:
       - name: create-couchbase-bucket
         bucket: wallet-ms      
-        bucket_password: welcome1   
+        bucket_password: welcome1
 
   - name: bank-ms
     repo: estafet-blockchain-demo-bank-ms
