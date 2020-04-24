@@ -5,16 +5,15 @@ def getVersion(pom) {
 }
 
 def getValue(name, configs) {
-	println "looking for ${name}"
-	println name.getClass()
+	println "looking for [${name}]"
 	configs.each { config ->
-		println config.name
-		println config.name.getClass()
-		if (name == config.name.trim()) {
-			return config.value.trim()
+		println "[${config.name}]"
+		if (name.equals(config.name)) {
+			println "return [${config.value}]"
+			return config.value
 		}
 	}
-	return null
+	error("There are no values for ${name}")
 }
 
 node("maven") {
