@@ -98,7 +98,7 @@ node("maven") {
 			def yml = readYaml file: "openshift/configuration/build-secret.yml"
 			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
 			def body = "-d 'name=${project}-${microservice}' -d 'ramQuotaMB=100' -d 'authType=sasl' -d 'bucketType=couchbase' -d 'saslPassword=${saslPassword}'"
-			httpRequest url: "http://couchbase.${params.PRODUCT}-database.svc:/pools/default/buckets", httpMode: "POST", validResponseCodes: "202", requestBody: body
+			httpRequest url: "http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets", httpMode: "POST", validResponseCodes: "202", requestBody: body
 		}		
 	}
 	
