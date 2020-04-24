@@ -10,7 +10,7 @@ def getValue(name, configs) {
 	configs.each { config ->
 		println config.name
 		println config.name.getClass()
-		if (name.equals(config.name)) {
+		if (name == config.name) {
 			return config.value
 		}
 	}
