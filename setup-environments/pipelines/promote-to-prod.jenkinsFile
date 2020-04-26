@@ -34,6 +34,28 @@ def getTestStatus(json) {
 	return new groovy.json.JsonSlurper().parseText(json).metadata.labels."test-passed"
 }
 
+def getValue(name, configs) {
+	def returnValue
+	configs.each { config ->
+		if (name.equals(config.name)) {
+			returnValue = config.value
+		}
+	}
+	return returnValue
+}
+
+def username(credentialsId) {
+    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        return USERNAME
+    }
+}
+
+def password(credentialsId) {
+    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        return PASSWORD
+    }
+}
+
 def testStatus(project) {
 	sh "oc get project ${project} -o json > test.json"
 	def test = readFile('test.json')
@@ -141,11 +163,12 @@ node("maven") {
 	}
 
 	if (pipelines.promote.db) {
-		stage("ensure the database exists") {
-			withMaven(mavenSettingsConfig: 'microservices-scrum') {
-		      sh "mvn clean package -P create-prod-db -Dmaven.test.skip=true -Dproject=${project} -Ddb.project=${dbProject}"
-		    } 
-		}
+		stage("prepare the database") {
+			def yml = readYaml file: "openshift/configuration/prod-${env}-secret.yml"
+			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
+			def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
+			sh "curl -X POST -u ${username('couchbase')}:${password('couchbase')} http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets ${body}"
+		}	
 	}
 
 	stage("read the resource definition") {

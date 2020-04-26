@@ -39,14 +39,24 @@ def nextProject(project) {
 	return next(namespace)
 }
 
-def username() {
-    withCredentials([usernamePassword(credentialsId: 'microservices-scrum', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+def getValue(name, configs) {
+	def returnValue
+	configs.each { config ->
+		if (name.equals(config.name)) {
+			returnValue = config.value
+		}
+	}
+	return returnValue
+}
+
+def username(credentialsId) {
+    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         return USERNAME
     }
 }
 
-def password() {
-    withCredentials([usernamePassword(credentialsId: 'microservices-scrum', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+def password(credentialsId) {
+    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         return PASSWORD
     }
 }
@@ -80,7 +90,7 @@ node('maven') {
 	def pipelines
 	
 	stage("checkout") {
-		git branch: "master", url: "https://${username()}:${password()}@github.com/${params.GITHUB}/${params.REPO}"
+		git branch: "master", url: "https://${username('microservices-scrum')}:${password('microservices-scrum')}@github.com/${params.GITHUB}/${params.REPO}"
 	}
 
 	stage ("determine the status of the ${prevProject} environment") {
@@ -144,9 +154,11 @@ node('maven') {
 
 	if (pipelines.release.db) {
 		stage("prepare the database") {
-			withMaven(mavenSettingsConfig: 'microservices-scrum') {
-		      sh "mvn clean package -P prepare-db -Dmaven.test.skip=true -Dproject=${project} -Ddb.project=${dbProject}"
-		    } 
+			def yml = readYaml file: "openshift/configuration/${label}-secret.yml"
+			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
+			httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets/${project}-${microservice}", httpMode: "DELETE", validResponseCodes: '200:404'
+			def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
+			sh "curl -X POST -u ${username('couchbase')}:${password('couchbase')} http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets ${body}"
 		}	
 	}		
 
