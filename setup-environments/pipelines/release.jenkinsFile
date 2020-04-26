@@ -17,6 +17,16 @@ def recentVersion(List versions) {
 	}[-1]
 }
 
+def getValue(name, configs) {
+	def returnValue
+	configs.each { config ->
+		if (name.equals(config.name)) {
+			returnValue = config.value
+		}
+	}
+	return returnValue
+}
+
 def username(credentialsId) {
     withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         return USERNAME
