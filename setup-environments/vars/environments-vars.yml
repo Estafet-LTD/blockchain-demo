@@ -30,6 +30,9 @@ environments:
 
   databases:
     - name: couchbase-setup
+      maxBucketCount: 36
+      memoryQuota: 1800
+      indexMemoryQuota: 1800
 
   monitoring:
     - name: jaeger-setup
