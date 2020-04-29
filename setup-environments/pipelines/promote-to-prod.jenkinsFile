@@ -84,7 +84,6 @@ node("maven") {
 	def project = "${params.PRODUCT}-prod"
 	def microservice = params.MICROSERVICE
 	def product = params.PRODUCT
-	def dbProject = "${params.PRODUCT}-database"
 	def version
 	def env
 	def pipelines
@@ -167,7 +166,7 @@ node("maven") {
 			def yml = readYaml file: "openshift/configuration/prod-${env}-secret.yml"
 			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
 			def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
-			sh "curl -X POST -u ${username('couchbase')}:${password('couchbase')} http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets ${body}"
+			sh "curl -X POST -u ${username('couchbase')}:${password('couchbase')} http://couchbase.${prod}.svc:8091/pools/default/buckets ${body}"
 		}	
 	}
 

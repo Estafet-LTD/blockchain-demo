@@ -36,7 +36,6 @@ node("maven") {
 	])
 
 	def project = "${params.PRODUCT}-build"
-	def dbProject = "${params.PRODUCT}-database"
 	def microservice = params.MICROSERVICE	
 	def version
 	def pipelines
@@ -110,9 +109,9 @@ node("maven") {
 		stage("prepare the database") {
 			def yml = readYaml file: "openshift/configuration/build-secret.yml"
 			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
-			httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets/${project}-${microservice}", httpMode: "DELETE", validResponseCodes: '200:404'
+			httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-build.svc:8091/pools/default/buckets/${project}-${microservice}", httpMode: "DELETE", validResponseCodes: '200:404'
 			def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
-			sh "curl -X POST -u ${username()}:${password()} http://couchbase.${params.PRODUCT}-database.svc:8091/pools/default/buckets ${body}"
+			sh "curl -X POST -u ${username()}:${password()} http://couchbase.${params.PRODUCT}-build.svc:8091/pools/default/buckets ${body}"
 		}		
 	}
 	
