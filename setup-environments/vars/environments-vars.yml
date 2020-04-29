@@ -28,12 +28,6 @@ environments:
     - name: delete-mq-namespace
       colour: green  
 
-  databases:
-    - name: couchbase-setup
-      maxBucketCount: 36
-      memoryQuota: 1800
-      indexMemoryQuota: 1800
-
   monitoring:
     - name: jaeger-setup
 
@@ -52,7 +46,8 @@ environments:
           tag: 2.25.1
           expose: false
         - name: blockchain-setup
-  
+        - name: couchbase-setup
+
     - name: test
       display: Test
       description: Test Environment
@@ -65,7 +60,7 @@ environments:
           amq_password: amq     
           templates_project: openshift 
         - name: blockchain-setup      
-          service_account: true
+        - name: couchbase-setup
   
     - name: perf
       display: Performance
@@ -79,6 +74,7 @@ environments:
           amq_password: amq      
           templates_project: openshift
         - name: blockchain-setup     
+        - name: couchbase-setup        
     
     - name: security
       display: Security
@@ -92,6 +88,7 @@ environments:
           amq_password: amq      
           templates_project: openshift
         - name: blockchain-setup   
+        - name: couchbase-setup        
                     
     - name: prod
       display: Production
@@ -100,4 +97,5 @@ environments:
       next: end    
       setup:    
         - name: blockchain-setup   
+        - name: couchbase-setup        
   
