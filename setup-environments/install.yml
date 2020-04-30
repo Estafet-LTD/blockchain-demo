@@ -4,6 +4,11 @@
   vars:
     workdir: "~/.estafet"  
   tasks:
+
+    - name: load the variables
+      include_vars:
+        dir: vars
+        extensions: [yml]  
    
     - name: Create Workdir
       file:
@@ -12,7 +17,7 @@
         
     - name: Checkout the boost console dependencies from github
       git:
-        repo: "https://github.com/{{ github }}/estafet-openshift-boost.git"
+        repo: "https://github.com/{{ github.org }}/estafet-openshift-boost.git"
         dest: "{{ workdir }}/estafet-openshift-boost"
         update: yes
       tags:
