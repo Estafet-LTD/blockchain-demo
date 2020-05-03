@@ -36,7 +36,7 @@ environments:
       role: edit   
       next: test
       setup:
-        - name: buildamq-setup    
+        - name: build-amq-setup    
           amq_user: amq
           amq_password: amq
         - name: wiremock-setup  
