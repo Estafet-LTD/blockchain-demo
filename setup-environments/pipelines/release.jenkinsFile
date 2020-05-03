@@ -54,8 +54,7 @@ node('maven') {
 	properties([
 	  parameters([
 	     string(name: 'GITHUB'), string(name: 'PRODUCT'), string(name: 'REPO'), string(name: 'MICROSERVICE'),
-	  ]),
-	  disableConcurrentBuilds()
+	  ])
 	])
 
 	def project = "${params.PRODUCT}-test"
@@ -123,7 +122,6 @@ node('maven') {
 			stage("prepare the database") {
 				def yml = readYaml file: "openshift/configuration/test-secret.yml"
 				def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
-				httpRequest authentication: "couchbase", url: "http://couchbase.${project}.svc:8091/pools/default/buckets/${project}-${microservice}", httpMode: "DELETE", validResponseCodes: '200:404'
 				def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
 				sh "curl -X POST -u ${username('couchbase')}:${password('couchbase')} http://couchbase.${project}.svc:8091/pools/default/buckets ${body}"
 			}	
