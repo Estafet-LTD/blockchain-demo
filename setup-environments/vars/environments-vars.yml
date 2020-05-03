@@ -36,10 +36,9 @@ environments:
       role: edit   
       next: test
       setup:
-        - name: amq-setup    
+        - name: buildamq-setup    
           amq_user: amq
           amq_password: amq
-          templates_project: openshift
         - name: wiremock-setup  
           tag: 2.25.1
           expose: false
@@ -56,7 +55,6 @@ environments:
         - name: amq-setup    
           amq_user: amq
           amq_password: amq     
-          templates_project: openshift 
         - name: blockchain-setup      
         - name: couchbase-setup
   
@@ -70,7 +68,6 @@ environments:
         - name: amq-setup    
           amq_user: amq
           amq_password: amq      
-          templates_project: openshift
         - name: blockchain-setup     
         - name: couchbase-setup        
     
@@ -84,7 +81,6 @@ environments:
         - name: amq-setup    
           amq_user: amq
           amq_password: amq      
-          templates_project: openshift
         - name: blockchain-setup   
         - name: couchbase-setup        
                     

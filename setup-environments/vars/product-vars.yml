@@ -31,7 +31,7 @@ product:
   repo: estafet-blockchain-demo
 
 # the working directory
-workdir: ~/.estafet
+workdir: "{{ ansible_env.HOME }}/.estafet"
 
 # Task Manager
 task_manager:

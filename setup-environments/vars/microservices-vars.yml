@@ -8,7 +8,8 @@ microservices:
     release: release.jenkinsFile
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
-    expose: true  
+    expose: true
+    messaging: false  
           
   - name: blockchain-gateway-ms
     repo: estafet-blockchain-demo-blockchain-gateway-ms
@@ -16,7 +17,8 @@ microservices:
     release: release.jenkinsFile
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
-    expose: false    
+    expose: false
+    messaging: true    
 
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
@@ -25,6 +27,7 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
+    messaging: true
     setup:
       - name: create-couchbase-bucket
         bucket: wallet-ms      
@@ -37,6 +40,7 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false
+    messaging: true
     setup:
       - name: create-couchbase-bucket
         bucket: bank-ms
@@ -49,6 +53,7 @@ microservices:
     promote: promote.jenkinsFile
     promote_to_prod: promote-to-prod.jenkinsFile     
     expose: false 
+    messaging: true
     setup:
       - name: create-couchbase-bucket
         bucket: currency-converter-ms        
