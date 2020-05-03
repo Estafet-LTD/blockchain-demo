@@ -28,9 +28,7 @@ openshift:
 product: 
   name: blockchain-demo
   description: Block Chain Demo
-
-# the name of the repostory for this project
-repo: estafet-blockchain-demo
+  repo: estafet-blockchain-demo
 
 # the working directory
 workdir: ~/.estafet

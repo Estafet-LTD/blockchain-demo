@@ -3,8 +3,6 @@
 
 environments:
 
-  repo: estafet-blockchain-demo
-
   setup:
     - name: nexus-setup    
     - name: github-webhook-setup
