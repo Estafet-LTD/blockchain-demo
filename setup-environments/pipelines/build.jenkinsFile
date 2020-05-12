@@ -14,18 +14,6 @@ def getValue(name, configs) {
 	return returnValue
 }
 
-def username() {
-    withCredentials([usernamePassword(credentialsId: 'couchbase', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        return USERNAME
-    }
-}
-
-def password() {
-    withCredentials([usernamePassword(credentialsId: 'couchbase', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        return PASSWORD
-    }
-}
-
 node("maven") {
 
 	properties([
@@ -106,11 +94,13 @@ node("maven") {
 	
 	if (pipelines.build.db) {
 		stage("prepare the database") {
-			def yml = readYaml file: "openshift/configuration/build-secret.yml"
-			def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
-			httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-build.svc:8091/pools/default/buckets/${project}-${microservice}", httpMode: "DELETE", validResponseCodes: '200:404'
-			def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
-			sh "curl -X POST -u ${username()}:${password()} http://couchbase.${params.PRODUCT}-build.svc:8091/pools/default/buckets ${body}"
+			withCredentials([usernamePassword(credentialsId: 'couchbase', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+				def yml = readYaml file: "openshift/configuration/build-secret.yml"
+				def saslPassword = getValue "COUCHBASE_PASSWORD", yml.secrets
+				httpRequest authentication: "couchbase", url: "http://couchbase.${params.PRODUCT}-build.svc:8091/pools/default/buckets/${project}-${microservice}", httpMode: "DELETE", validResponseCodes: '200:404'
+				def body = "-d name=${project}-${microservice} -d ramQuotaMB=100 -d authType=sasl -d bucketType=couchbase -d saslPassword=${saslPassword}"
+				sh "curl -X POST -u ${USERNAME}:${PASSWORD} http://couchbase.${params.PRODUCT}-build.svc:8091/pools/default/buckets ${body}"				
+			}
 		}		
 	}
 	
