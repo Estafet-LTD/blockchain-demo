@@ -56,7 +56,7 @@ node('maven') {
 	boolean skipStages = false
 	
 	stage("checkout") {
-		withCredentials([usernamePassword(credentialsId: 'microservices-scrum', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+		withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 			git branch: "master", url: "https://${USERNAME}:${PASSWORD}@github.com/${params.GITHUB}/${params.REPO}"			
 		}
 	}
@@ -129,7 +129,7 @@ node('maven') {
 		stage("perform release") {
 	    sh "git config --global user.email \"jenkins@estafet.com\""
 	  	sh "git config --global user.name \"jenkins\""
-	    withMaven(mavenSettingsConfig: 'microservices-scrum') {
+	    withMaven(mavenSettingsConfig: 'maven') {
 				sh "mvn release:clean release:prepare release:perform -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${developmentVersion} -DpushChanges=false -DlocalCheckout=true -DpreparationGoals=initialize -B"
 				sh "git push origin master"
 				sh "git tag ${releaseVersion}"
