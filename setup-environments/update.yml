@@ -38,10 +38,9 @@
       - "{{ workdir }}/estafet-openshift-boost/setup-environments/*.ini"
 
     - name: Updating boost roles
-      copy:
+      synchronize:
         src: "{{ workdir }}/estafet-openshift-boost/setup-environments/roles"
-        dest: "~/.ansible"
-        force: yes
+        dest: "~/.ansible"    
 
     - name: Updating product roles
       copy:
