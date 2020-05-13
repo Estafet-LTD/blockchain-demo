@@ -1,1 +1,0 @@
-oc port-forward `oc get pods --selector app=postgresql | sed -n 2p | cut -d' ' -f1` 5432:5432
