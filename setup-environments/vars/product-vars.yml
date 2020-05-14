@@ -1,5 +1,14 @@
 ---
-# openshift
+# boost version
+boost: 0.0.1
+
+# product definition
+product: 
+  name: blockchain-demo
+  description: Block Chain Demo
+  repo: estafet-blockchain-demo
+
+# openshift cluster definition
 openshift:
   host: !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -23,12 +32,6 @@ openshift:
           31623536333361336634356635326462363031646464323530646433326439363532643238643764
           6232643832386662380a656562383461633866613561626235363363383831373332396233653330
           3562
-  
-# the project code
-product: 
-  name: blockchain-demo
-  description: Block Chain Demo
-  repo: estafet-blockchain-demo
 
 # the working directory
 workdir: "{{ ansible_env.HOME }}/.estafet"
