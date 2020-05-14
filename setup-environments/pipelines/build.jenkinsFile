@@ -86,7 +86,7 @@ node("maven") {
 
 	if (pipelines.build.tests) {
 		stage("unit tests") {
-			withMaven(mavenSettingsConfig: 'microservices-scrum') {
+			withMaven(mavenSettingsConfig: 'maven') {
 		     sh "mvn clean test"
 		  } 
 		}		
@@ -136,7 +136,7 @@ node("maven") {
 
 	if (pipelines.build.tests) {
 		stage("execute the container tests") {
-			withMaven(mavenSettingsConfig: 'microservices-scrum') {
+			withMaven(mavenSettingsConfig: 'maven') {
 				sh "mvn clean verify -P integration-test"
 			}    		
 		}		
