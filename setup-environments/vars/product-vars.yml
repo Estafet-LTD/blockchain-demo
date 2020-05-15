@@ -39,7 +39,7 @@ workdir: "{{ ansible_env.HOME }}/.estafet"
 # Task Manager
 task_manager:
   name: trello
-  title: Trello Features
+  title: Trello Cards
 
 # trello
 trello:
