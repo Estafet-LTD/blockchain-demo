@@ -4,59 +4,27 @@ microservices:
 
   - name: console-ui     
     repo: estafet-blockchain-demo-console-ui
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    test: test.jenkinsFile     
     expose: true
-    messaging: false  
           
   - name: blockchain-gateway-ms
     repo: estafet-blockchain-demo-blockchain-gateway-ms
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    test: test.jenkinsFile     
     expose: false
-    messaging: true    
 
   - name: wallet-ms
     repo: estafet-blockchain-demo-wallet-ms
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    test: test.jenkinsFile     
     expose: false
-    messaging: true
-    setup:
-      - name: create-couchbase-bucket
-        bucket: wallet-ms      
-        bucket_password: welcome1   
 
   - name: bank-ms
     repo: estafet-blockchain-demo-bank-ms
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    test: test.jenkinsFile     
     expose: false
-    messaging: true
-    setup:
-      - name: create-couchbase-bucket
-        bucket: bank-ms
-        bucket_password: welcome1
         
   - name: currency-converter-ms
     repo: estafet-blockchain-demo-currency-converter-ms
-    build: build.jenkinsFile
-    release: release.jenkinsFile
-    promote: promote.jenkinsFile
-    promote_to_prod: promote-to-prod.jenkinsFile     
+    test: test.jenkinsFile     
     expose: false 
-    messaging: true
-    setup:
-      - name: create-couchbase-bucket
-        bucket: currency-converter-ms        
-        bucket_password: welcome1
 
 
