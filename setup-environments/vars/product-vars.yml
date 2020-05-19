@@ -37,7 +37,7 @@ openshift:
 # Task Manager
 task_manager:
   name: trello
-  title: Trello Cards
+  title: Features
 
 # trello
 trello:
