@@ -1,7 +1,5 @@
 ---
 # Add new users here
 users:
-  - name: dennis.williams@estafet.com
-  - name: michael.ruse@estafet.com 
-  - name: iryna.poplavska@estafet.com         
+  - name: dennis.williams@estafet.com 
     
