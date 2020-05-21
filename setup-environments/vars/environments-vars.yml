@@ -3,6 +3,8 @@
 
 environments:
 
+  maven_mirror_url: "http://nexus-nexus.{{ openshift_host }}/nexus/content/groups/public/"
+  
   setup:
     - name: nexus-setup    
     - name: github-webhook-setup

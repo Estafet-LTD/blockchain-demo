@@ -6,7 +6,7 @@ developer_environment:
   test: false
 
   maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
-  docker_registry: docker-registry.default.svc:5000
+  docker_registry: "{{ openshift.registry }}"
 
   setup:
     - name: jaeger-setup
