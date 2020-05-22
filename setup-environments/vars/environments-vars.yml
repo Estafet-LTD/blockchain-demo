@@ -3,7 +3,7 @@
 
 environments:
 
-  maven_mirror_url: "http://nexus-nexus.{{ openshift.host }}:{{ openshift.port }}/nexus/content/groups/public/"
+  maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
 
   setup:
     - name: nexus-setup    
@@ -11,13 +11,13 @@ environments:
 
     - name: mq-namespace-setup
       colour: blue    
-      amq_user: amq
-      amq_password: amq
+      amq_user: "{{ secrets.amq.user }}"
+      amq_password: "{{ secrets.amq.password }}"
 
     - name: mq-namespace-setup
       colour: green    
-      amq_user: amq
-      amq_password: amq
+      amq_user: "{{ secrets.amq.user }}"
+      amq_password: "{{ secrets.amq.password }}"
 
   teardown:
     - name: github-webhook-teardown
@@ -50,8 +50,8 @@ environments:
       next: perf   
       setup:
         - name: amq-setup    
-          amq_user: amq
-          amq_password: amq     
+          amq_user: "{{ secrets.amq.user }}"
+          amq_password: "{{ secrets.amq.password }}"     
         - name: blockchain-setup      
         - name: couchbase-setup
   
@@ -63,8 +63,8 @@ environments:
       next: security 
       setup:
         - name: amq-setup    
-          amq_user: amq
-          amq_password: amq      
+          amq_user: "{{ secrets.amq.user }}"
+          amq_password: "{{ secrets.amq.password }}"      
         - name: blockchain-setup     
         - name: couchbase-setup        
     
@@ -76,8 +76,8 @@ environments:
       next: prod  
       setup:
         - name: amq-setup    
-          amq_user: amq
-          amq_password: amq      
+          amq_user: "{{ secrets.amq.user }}"
+          amq_password: "{{ secrets.amq.password }}"      
         - name: blockchain-setup   
         - name: couchbase-setup        
                     
