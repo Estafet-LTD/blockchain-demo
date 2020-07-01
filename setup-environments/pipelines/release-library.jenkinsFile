@@ -10,9 +10,7 @@ node('maven') {
 	])
 
 	stage("checkout") {
-		withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-			git branch: "master", url: "https://${USERNAME}:${PASSWORD}@github.com/${params.GITHUB}/${params.REPO}"			
-		}
+		git branch: credentialsId: "git", "master", url: "https://github.com/${params.GITHUB}/${params.REPO}"
 	}
 	
 	stage("increment version") {
