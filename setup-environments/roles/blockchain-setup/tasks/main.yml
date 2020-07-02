@@ -24,7 +24,7 @@
     - openshift
 
 - name: Create the go ethereum application
-  shell: "oc process -n {{ project }} -f go-ethereum-config.yml -p NAMESPACE={{ project }} | oc apply -f -"
+  shell: "oc process -n {{ project }} -f {{ role_path }}/files/go-ethereum-config.yml -p NAMESPACE={{ project }} | oc apply -f -"
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
