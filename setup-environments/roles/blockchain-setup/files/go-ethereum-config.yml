@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: Template
+metadata:
+  creationTimestamp: null
+  name: go-ethereum
+parameters:
+- description: Defines the namespace within which these objects are deployed
+  name: NAMESPACE
+  required: true
+- description: Defines version of the blockchain
+  name: VERSION
+  value: 0.0.1
+  required: true 
+objects:
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: go-ethereum
+    namespace: ${NAMESPACE}
+    labels:
+      app: go-ethereum
+  spec:
+    strategy:
+      type: Rolling
+      resources: {}
+      activeDeadlineSeconds: 21600
+    replicas: 1
+    revisionHistoryLimit: 10
+    test: false
+    selector:
+      deploymentconfig: go-ethereum
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          deploymentconfig: go-ethereum
+      spec:
+        containers:
+          - name: go-ethereum
+            image: "docker.io/estafetltd/go-ethereum:${VERSION}"
+            ports:
+              - containerPort: 30303
+                protocol: TCP
+              - containerPort: 30303
+                protocol: UDP
+              - containerPort: 8545
+                protocol: TCP
+              - containerPort: 8546
+                protocol: TCP
+              - containerPort: 8547
+                protocol: TCP
+            env:
+              - name: RPC_VHOST
+                value: "go-ethereum.${NAMESPACE}.svc"
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            imagePullPolicy: Always
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
+        dnsPolicy: ClusterFirst
+        serviceAccountName: useroot
+        serviceAccount: useroot
+        securityContext: {}
+        schedulerName: default-scheduler
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: go-ethereum
+    namespace: ${NAMESPACE}
+    labels:
+      app: go-ethereum
+  spec:
+    ports:
+      - name: 8545-tcp
+        protocol: TCP
+        port: 8545
+        targetPort: 8545
+      - name: 8546-tcp
+        protocol: TCP
+        port: 8546
+        targetPort: 8546
+      - name: 8547-tcp
+        protocol: TCP
+        port: 8547
+        targetPort: 8547
+      - name: 30303-tcp
+        protocol: TCP
+        port: 30303
+        targetPort: 30303
+      - name: 30303-udp
+        protocol: UDP
+        port: 30303
+        targetPort: 30303
+    selector:
+      deploymentconfig: go-ethereum
+    type: ClusterIP
+    sessionAffinity: None
+  status:
+    loadBalancer: {}

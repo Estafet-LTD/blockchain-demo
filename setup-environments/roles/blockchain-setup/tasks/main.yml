@@ -24,20 +24,12 @@
     - openshift
 
 - name: Create the go ethereum application
-  shell: 'oc new-app ethereum/client-go~https://github.com/Estafet-LTD/go-ethereum.git -e RPC_VHOST=go-ethereum.{{ project }}.svc --strategy=docker -n {{ project }}'
+  shell: "oc process -n {{ project }} -f go-ethereum-config.yml -p NAMESPACE={{ project }} | oc apply -f -"
   register: command_result
   failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
   changed_when: "'exists' not in command_result.stderr"
   tags:
-    - openshift   
-
-- name: Patch the service account for the deployment config
-  shell: 'oc patch dc/go-ethereum -p ''{"spec":{"template":{"spec":{"serviceAccountName": "useroot"}}}}'' -n {{ project }}'
-  register: command_result
-  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
-  changed_when: "'exists' not in command_result.stderr"
-  tags:
-    - openshift   
+    - openshift     
 
 - name: Wait for go-ethereum to become available
   shell : "oc rollout status dc/go-ethereum  -n {{ project }}"
