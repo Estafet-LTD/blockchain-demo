@@ -4,6 +4,9 @@ environments:
 
   # specify the maven repository for the java image builders
   maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
+  
+  # smoke tests verify the deployments to the adaptive environments
+  smoke_test_repo: estafet-blockchain-demo-smoke
 
   # tasks that create the platform resources that are used by all environments
   setup:
@@ -39,7 +42,6 @@ environments:
         # a wiremock server provides stub implementations for microservices that require
         - name: wiremock-setup  
           tag: 2.25.1
-          expose: false
           
         # creates a blockchain blockchain using the 'local' role
         - name: blockchain-setup
