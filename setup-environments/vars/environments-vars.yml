@@ -35,10 +35,8 @@ environments:
       display: Build
       description: Build Environment   
       next: test
-      
       # tasks to create resources for this environment
       setup:
-        
         # a wiremock server provides stub implementations for microservices that require
         - name: wiremock-setup  
           tag: 2.25.1
@@ -91,7 +89,6 @@ environments:
       test_repo: estafet-blockchain-demo-qa-prod
       next: end    
       setup:    
-      
         # an amq broker for blue deployments
         - name: amq-setup
           application_name: blue
