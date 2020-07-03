@@ -5,7 +5,7 @@ environments:
   # specify the maven repository for the java image builders
   maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
   
-  # smoke tests verify the deployments to the adaptive environments
+  # smoke tests verify the deployments to the environments (expect build)
   smoke_test_repo: estafet-blockchain-demo-smoke
 
   # tasks that create the platform resources that are used by all environments
