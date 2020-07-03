@@ -40,3 +40,6 @@
 [submodule "estafet-blockchain-demo-qa-perf"]
 	path = estafet-blockchain-demo-qa-perf
 	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-perf
+[submodule "estafet-blockchain-demo-qa-smoke-test"]
+	path = estafet-blockchain-demo-qa-smoke-test
+	url = https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-smoke-test
