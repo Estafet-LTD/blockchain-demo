@@ -3,8 +3,7 @@
 environments:
 
   maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
-  
-  smoke_test_repo: estafet-blockchain-demo-smoke
+  smoke_test_repo: estafet-blockchain-demo-qa-smoke-test
 
   setup:
     - name: nexus-setup     
@@ -24,7 +23,6 @@ environments:
       setup:
         - name: wiremock-setup  
           tag: 2.25.1
-          
         - name: blockchain-setup
         - name: couchbase-setup
 
@@ -49,7 +47,6 @@ environments:
         - name: amq-setup    
           amq_user: amq
           amq_password: amq      
-          
         - name: blockchain-setup     
         - name: couchbase-setup        
     
@@ -62,7 +59,6 @@ environments:
         - name: amq-setup    
           amq_user: amq
           amq_password: amq 
-               
         - name: blockchain-setup   
         - name: couchbase-setup        
                     
@@ -76,12 +72,10 @@ environments:
           application_name: blue
           amq_user: amq
           amq_password: amq     
-            
         - name: amq-setup
           application_name: green
           amq_user: amq
           amq_password: amq  
-          
         - name: blockchain-setup   
         - name: couchbase-setup        
   
