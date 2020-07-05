@@ -12,18 +12,12 @@ local_environment:
   setup:
     - name: jaeger-setup
     - name: blockchain-setup
-    - name: imagestream-setup
-            
+    - name: imagestream-setup 
     - name: couchbase-setup
-      expose: true
-
     - name: amq-setup    
-      amq_user: amq
-      amq_password: amq
       templates_project: "{{ env_project }}"
-
     - name: wiremock-setup  
       tag: 2.25.1
-      expose: false
+      expose: true
 
 

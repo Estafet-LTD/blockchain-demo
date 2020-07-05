@@ -11,11 +11,5 @@ qa_environment:
   setup:
     - name: jaeger-setup
     - name: blockchain-setup
-    
     - name: couchbase-setup
-      expose: true
-
     - name: amq-setup    
-      amq_user: amq
-      amq_password: amq
-      templates_project: openshift

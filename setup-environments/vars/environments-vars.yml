@@ -32,9 +32,7 @@ environments:
       test_repo: estafet-blockchain-demo-qa
       next: perf   
       setup:
-        - name: amq-setup    
-          amq_user: amq
-          amq_password: amq     
+        - name: amq-setup      
         - name: blockchain-setup      
         - name: couchbase-setup
   
@@ -44,9 +42,7 @@ environments:
       test_repo: estafet-blockchain-demo-qa-perf
       next: security 
       setup:
-        - name: amq-setup    
-          amq_user: amq
-          amq_password: amq      
+        - name: amq-setup      
         - name: blockchain-setup     
         - name: couchbase-setup        
     
@@ -57,8 +53,6 @@ environments:
       next: prod  
       setup:
         - name: amq-setup    
-          amq_user: amq
-          amq_password: amq 
         - name: blockchain-setup   
         - name: couchbase-setup        
                     
@@ -69,13 +63,9 @@ environments:
       next: end    
       setup:    
         - name: amq-setup
-          application_name: blue
-          amq_user: amq
-          amq_password: amq     
+          application_name: blue  
         - name: amq-setup
           application_name: green
-          amq_user: amq
-          amq_password: amq  
         - name: blockchain-setup   
         - name: couchbase-setup        
   
