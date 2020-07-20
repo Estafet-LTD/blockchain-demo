@@ -3,22 +3,22 @@
 libraries:
 
   - name: messages-lib
-    repo: estafet-blockchain-demo-messages-lib
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-messages-lib.git
     build: build-library.jenkinsFile
     release: release-library.jenkinsFile
     
   - name: commons-lib
-    repo: estafet-blockchain-demo-commons-lib   
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-commons-lib.git
     build: build-library.jenkinsFile
     release: release-library.jenkinsFile   
       
   - name: pages-lib
-    repo: estafet-blockchain-demo-pages-lib
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-pages-lib.git
     build: build-library.jenkinsFile
     release: release-library.jenkinsFile    
     
   - name: data-lib
-    repo: estafet-blockchain-demo-data-lib   
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-data-lib.git
     build: build-library.jenkinsFile
     release: release-library.jenkinsFile    
             

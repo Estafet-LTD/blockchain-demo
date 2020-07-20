@@ -3,26 +3,26 @@
 microservices:
 
   - name: console-ui     
-    repo: estafet-blockchain-demo-console-ui
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-console-ui.git
     test: test-microservice.jenkinsFile     
     expose: true
           
   - name: blockchain-gateway-ms
-    repo: estafet-blockchain-demo-blockchain-gateway-ms
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-blockchain-gateway-ms.git
     test: test-microservice.jenkinsFile     
     expose: false
 
   - name: wallet-ms
-    repo: estafet-blockchain-demo-wallet-ms
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-wallet-ms.git
     test: test-microservice.jenkinsFile
     expose: false
 
   - name: bank-ms
-    repo: estafet-blockchain-demo-bank-ms
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-bank-ms.git
     test: test-microservice.jenkinsFile
     expose: false
         
   - name: currency-converter-ms
-    repo: estafet-blockchain-demo-currency-converter-ms
+    repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-currency-converter-ms.git
     test: test-microservice.jenkinsFile
     expose: false 
