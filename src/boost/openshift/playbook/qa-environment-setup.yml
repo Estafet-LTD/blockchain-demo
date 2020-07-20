@@ -5,12 +5,12 @@
   
     - name: load the variables
       include_vars:
-        dir: vars
+        dir: ../vars
         extensions: [yml]  
         
     - name: Verify if the environments have been defined
       fail:
-        msg: "[QA environment definition] are not set. Please edit qa-environment-vars.yml"
+        msg: "[QA environment definition] are not set. Please edit qa-environment.yml"
       when: qa_environment is undefined
             
     - include_role:
