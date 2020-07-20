@@ -7,7 +7,7 @@ boost:
 product: 
   name: blockchain-demo
   description: Block Chain Demo
-  repo: estafet-blockchain-demo
+  repo: https://github.com/Estafet-LTD/estafet-blockchain-demo.git
 
 # Task Manager
 task_manager:
