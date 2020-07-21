@@ -1,7 +1,6 @@
 ---
 # github
 github:
-   org: Estafet-LTD
    user: !vault |
                 $ANSIBLE_VAULT;1.1;AES256
                 62313433396161386665383064636661353166636337373233653362636631616162376436633539
