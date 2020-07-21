@@ -3,7 +3,7 @@
 environments:
 
   maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
-  smoke_test_repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-smoke-test.git
+  smoke_test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-smoke-test.git
 
   setup:
     - name: nexus-setup     
@@ -29,7 +29,7 @@ environments:
     - name: test
       display: Test
       description: Test Environment
-      test_repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-qa.git
+      test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa.git
       next: perf   
       setup:
         - name: amq-setup      
@@ -39,7 +39,7 @@ environments:
     - name: perf
       display: Performance
       description: Performance Test Environment
-      test_repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-perf.git
+      test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-perf.git
       next: security 
       setup:
         - name: amq-setup      
@@ -49,7 +49,7 @@ environments:
     - name: security
       display: Security
       description: Security Test Environment
-      test_repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-security.git
+      test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-security.git
       next: prod  
       setup:
         - name: amq-setup    
@@ -59,7 +59,7 @@ environments:
     - name: prod
       display: Production
       description: Production Environment
-      test_repo: https://github.com/Estafet-LTD/estafet-blockchain-demo-qa-prod.git
+      test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-prod.git
       next: end    
       setup:    
         - name: amq-setup
