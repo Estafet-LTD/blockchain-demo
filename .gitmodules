@@ -1,0 +1,30 @@
+[submodule "blockchain-demo-bank-ms"]
+	path = blockchain-demo-bank-ms
+	url = https://github.com/Estafet-LTD/blockchain-demo-bank-ms.git
+[submodule "blockchain-demo-gateway-ms"]
+	path = blockchain-demo-gateway-ms
+	url = https://github.com/Estafet-LTD/blockchain-demo-gateway-ms.git
+[submodule "blockchain-demo-console-ui"]
+	path = blockchain-demo-console-ui
+	url = https://github.com/Estafet-LTD/blockchain-demo-console-ui.git
+[submodule "blockchain-demo-currency-converter-ms"]
+	path = blockchain-demo-currency-converter-ms
+	url = https://github.com/Estafet-LTD/blockchain-demo-currency-converter-ms.git
+[submodule "blockchain-demo-wallet-ms"]
+	path = blockchain-demo-wallet-ms
+	url = https://github.com/Estafet-LTD/blockchain-demo-wallet-ms.git
+[submodule "blockchain-demo-qa"]
+	path = blockchain-demo-qa
+	url = https://github.com/Estafet-LTD/blockchain-demo-qa.git
+[submodule "blockchain-demo-qa-perf"]
+	path = blockchain-demo-qa-perf
+	url = https://github.com/Estafet-LTD/blockchain-demo-qa-perf.git
+[submodule "blockchain-demo-qa-prod"]
+	path = blockchain-demo-qa-prod
+	url = https://github.com/Estafet-LTD/blockchain-demo-qa-prod.git
+[submodule "blockchain-demo-qa-security"]
+	path = blockchain-demo-qa-security
+	url = https://github.com/Estafet-LTD/blockchain-demo-qa-security.git
+[submodule "blockchain-demo-qa-smoke-test"]
+	path = blockchain-demo-qa-smoke-test
+	url = https://github.com/Estafet-LTD/blockchain-demo-qa-smoke-test.git
