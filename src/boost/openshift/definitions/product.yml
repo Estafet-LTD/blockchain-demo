@@ -1,7 +1,6 @@
 ---
 # boost version
 boost:
-  repo: https://github.com/boostcd/boostcd.git
   version: master
 
 # product definition
