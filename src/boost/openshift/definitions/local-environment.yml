@@ -10,14 +10,14 @@ local_environment:
   docker_registry: 172.30.1.1:5000
 
   setup:
-    - name: jaeger-setup
-    - name: blockchain-setup
-    - name: imagestream-setup 
-    - name: couchbase-setup
-    - name: amq-setup    
+    - name: blockchain_setup    
+    - name: boostcd.jaeger_setup
+    - name: boostcd.couchbase_setup
+    - name: boostcd.amq_setup
       templates_project: "{{ env_project }}"
-    - name: wiremock-setup  
+    - name: boostcd.wiremock_setup  
       tag: 2.25.1
       expose: true
+
 
 

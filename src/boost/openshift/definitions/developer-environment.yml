@@ -1,18 +1,12 @@
 ---
 # Developer Environment definition
-
 developer_environment:
-
   test: false
-
-  maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
-  docker_registry: "{{ openshift.registry }}"
-
   setup:
-    - name: jaeger-setup
-    - name: blockchain-setup
-    - name: couchbase-setup
-    - name: amq-setup    
-    - name: wiremock-setup  
+    - name: blockchain_setup    
+    - name: boostcd.jaeger_setup
+    - name: boostcd.couchbase_setup
+    - name: boostcd.amq_setup
+    - name: boostcd.wiremock_setup  
       tag: 2.25.1
       expose: true

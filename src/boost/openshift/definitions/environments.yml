@@ -2,18 +2,13 @@
 # Environments definition
 environments:
 
-  maven_mirror_url: http://nexus.nexus.svc:8081/nexus/content/groups/public
   smoke_test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-smoke-test.git
 
   setup:
-    - name: nexus-setup     
-    - name: github-webhook-setup
-
-  teardown:
-    - name: github-webhook-teardown
+    - name: boostcd.nexus_setup     
 
   monitoring:
-    - name: jaeger-setup
+    - name: boostcd.jaeger_setup
 
   stages:
     - name: build
@@ -21,10 +16,10 @@ environments:
       description: Build Environment   
       next: test
       setup:
-        - name: wiremock-setup  
+        - name: boostcd.wiremock_setup  
           tag: 2.25.1
-        - name: blockchain-setup
-        - name: couchbase-setup
+        - name: boostcd.couchbase_setup
+        - name: blockchain_setup
 
     - name: test
       display: Test
@@ -32,9 +27,9 @@ environments:
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa.git
       next: perf   
       setup:
-        - name: amq-setup      
-        - name: blockchain-setup      
-        - name: couchbase-setup
+        - name: boostcd.amq_setup
+        - name: boostcd.couchbase_setup         
+        - name: blockchain_setup      
   
     - name: perf
       display: Performance
@@ -42,9 +37,9 @@ environments:
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-perf.git
       next: security 
       setup:
-        - name: amq-setup      
-        - name: blockchain-setup     
-        - name: couchbase-setup        
+        - name: boostcd.amq_setup
+        - name: boostcd.couchbase_setup         
+        - name: blockchain_setup         
     
     - name: security
       display: Security
@@ -52,9 +47,9 @@ environments:
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-security.git
       next: prod  
       setup:
-        - name: amq-setup    
-        - name: blockchain-setup   
-        - name: couchbase-setup        
+        - name: boostcd.amq_setup
+        - name: boostcd.couchbase_setup         
+        - name: blockchain_setup         
                     
     - name: prod
       display: Production
@@ -62,10 +57,10 @@ environments:
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-prod.git
       next: end    
       setup:    
-        - name: amq-setup
+        - name: boostcd.amq_setup
           application_name: blue  
-        - name: amq-setup
+        - name: boostcd.amq_setup
           application_name: green
-        - name: blockchain-setup   
-        - name: couchbase-setup        
+        - name: blockchain_setup   
+        - name: boostcd.couchbase_setup
   
