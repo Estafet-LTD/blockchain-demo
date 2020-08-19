@@ -1,6 +1,0 @@
----
-- name: Update the users for Microservices Scrum Demo
-  hosts: local
-  roles:
-    - _update_users
-

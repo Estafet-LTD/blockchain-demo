@@ -1,9 +1,0 @@
----
-- name: Update Dependencies with openshift configuration
-  hosts: local  
-  roles:
-    - _uninstall_boost_services    
-    - _webhook_setup
-    - _update_environments
-    - _install_boost_services
-

@@ -1,9 +1,0 @@
----
-- name: Update the product
-  hosts: local
-  tasks:
-    - include_role:
-        name: _init_product
-      vars:
-        project: boost-services
-  

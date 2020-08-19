@@ -1,6 +1,0 @@
----
-- name: Boost Development Environment
-  hosts: local  
-  roles:
-    - _uninstall_boost_development
-

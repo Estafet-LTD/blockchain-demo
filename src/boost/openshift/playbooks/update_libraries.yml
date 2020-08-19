@@ -1,7 +1,0 @@
----
-- name: Update the libraries
-  hosts: local
-  roles:
-    - _cicd_environment_setup
-         
-  
