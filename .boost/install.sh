@@ -19,6 +19,7 @@ function parse_yaml {
 
 BASEDIR=$(dirname "$0")
 eval $(parse_yaml $BASEDIR/../src/boost/openshift/definitions/product.yml)
+rm -rf $BASEDIR/../src/boost/openshift/playbooks
 mkdir -p $BASEDIR/../src/boost/openshift/playbooks 
 wget https://raw.githubusercontent.com/boostcd/boostcd/$boost_version/src/boost/openshift/playbooks/install.yml -q -P $BASEDIR/../src/boost/openshift/playbooks 
 ansible-playbook $BASEDIR/../src/boost/openshift/playbooks/install.yml
