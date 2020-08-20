@@ -27,3 +27,14 @@ jira:
   access_token: "{{ credentials.jira.access_token }}"
   username: "{{ credentials.jira.username }}"
   base_url: https://estafet.atlassian.net
+
+couchbase:
+  user: "{{ credentials.couchbase.user }}"
+  password: "{{ credentials.couchbase.password }}"
+
+webhooks:
+  setup:
+    - name: boostcd.github_webhook_setup
+
+  teardown:
+    - name: boostcd.github_webhook_teardown

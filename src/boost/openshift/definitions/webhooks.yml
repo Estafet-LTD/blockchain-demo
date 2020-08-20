@@ -1,7 +1,0 @@
----
-webhooks:
-    setup:
-    - name: boostcd.github_webhook_setup
-    
-    teardown:
-    - name: boostcd.github_webhook_teardown        
