@@ -1,13 +1,12 @@
 ---
 # boost version
 boost:
-  version: 0.2.6
+  version: master
 
 # product definition
 product: 
   name: blockchain-demo
   description: Block Chain Demo
-  repo: https://github.com/Estafet-LTD/blockchain-demo.git
 
 # Task Manager
 task_manager:
