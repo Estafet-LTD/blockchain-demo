@@ -4,7 +4,7 @@ boost:
   version: master
 
 # product definition
-product: 
+product:
   name: blockchain-demo
   description: Block Chain Demo
 
@@ -12,3 +12,18 @@ product:
 task_manager:
   name: trello
   title: Features
+
+# github
+github:
+  user: "{{ credentials.github.user }}"
+  password: "{{ credentials.github.password }}"
+
+# trello
+trello:
+  access_token: "{{ credentials.trello.access_token }}"
+  api_key: "{{ credentials.trello.api_key }}"
+
+jira:
+  access_token: "{{ credentials.jira.access_token }}"
+  username: "{{ credentials.jira.username }}"
+  base_url: https://estafet.atlassian.net
