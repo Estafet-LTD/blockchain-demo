@@ -1,3 +1,7 @@
+.PHONY: list
+list:
+	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
+
 # Install Boost Core Locally
 install:
 	@./install.sh
@@ -50,10 +54,10 @@ update_product:
 update_users:
 	@ansible-playbook -i src/openshift/playbooks/hosts.ini src/openshift/playbooks/update_users.yml
 
-# Update Boost Version
-update_version:
-	@ansible-playbook -i src/openshift/playbooks/hosts.ini src/openshift/playbooks/update_version.yml
+# Update Boost and Services to the Stated Version
+update:
+	@ansible-playbook -i src/openshift/playbooks/hosts.ini src/openshift/playbooks/update.yml
 
 # Repair Product Jenkins
-update_version:
+repair_product_jenkins:
 	@ansible-playbook -i src/openshift/playbooks/hosts.ini src/openshift/playbooks/repair_product_jenkins.yml
