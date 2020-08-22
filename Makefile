@@ -56,6 +56,7 @@ update_users:
 
 # Update Boost and Services to the Stated Version
 update:
+	@make install
 	@ansible-playbook -i src/boost/openshift/playbooks/hosts.ini src/boost/openshift/playbooks/update.yml
 
 # Repair Product Jenkins
