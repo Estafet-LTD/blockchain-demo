@@ -8,6 +8,11 @@ ubuntu_prepare:
 	sudo apt update
 	sudo apt install yq -y
 
+dependencies:
+	python3 -m pip install jmespath
+	python3 -m pip install lxml
+	python3 -m pip install pygithub
+
 # Install Boost Core Locally
 install:
 	$(eval  boost_version := $(shell yq r src/boost/openshift/definitions/product.yml boost.version))
@@ -15,6 +20,8 @@ install:
 	@mkdir -p src/boost/openshift/playbooks 
 	@wget https://raw.githubusercontent.com/boostcd/boostcd/${boost_version}/src/boost/openshift/playbooks/install.yml -q -P src/boost/openshift/playbooks 
 	@wget https://raw.githubusercontent.com/boostcd/boostcd/${boost_version}/src/boost/openshift/playbooks/hosts.ini -q -P src/boost/openshift/playbooks 
+	@ansible-galaxy collection install ansible.posix
+	@ansible-galaxy collection install community.general
 	@ansible-playbook -i src/boost/openshift/playbooks/hosts.ini src/boost/openshift/playbooks/install.yml
 
 # Installs Boost Development Environment

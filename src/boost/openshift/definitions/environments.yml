@@ -10,6 +10,9 @@ environments:
   monitoring:
     - name: boostcd.jaeger_setup
 
+  databases:
+    - name: boostcd.couchbase_setup
+
   stages:
     - name: build
       display: Build
@@ -18,7 +21,6 @@ environments:
       setup:
         - name: boostcd.wiremock_setup  
           tag: 2.25.1
-        - name: boostcd.couchbase_setup
         - name: blockchain_setup
 
     - name: test
@@ -27,8 +29,7 @@ environments:
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa.git
       next: perf   
       setup:
-        - name: boostcd.amq_setup
-        - name: boostcd.couchbase_setup         
+        - name: boostcd.amq_setup     
         - name: blockchain_setup      
   
     - name: perf
@@ -37,8 +38,7 @@ environments:
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-perf.git
       next: security 
       setup:
-        - name: boostcd.amq_setup
-        - name: boostcd.couchbase_setup         
+        - name: boostcd.amq_setup   
         - name: blockchain_setup         
     
     - name: security
@@ -47,8 +47,7 @@ environments:
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-security.git
       next: prod  
       setup:
-        - name: boostcd.amq_setup
-        - name: boostcd.couchbase_setup         
+        - name: boostcd.amq_setup     
         - name: blockchain_setup         
                     
     - name: prod
@@ -62,5 +61,4 @@ environments:
         - name: boostcd.amq_setup
           application_name: green
         - name: blockchain_setup   
-        - name: boostcd.couchbase_setup
   
