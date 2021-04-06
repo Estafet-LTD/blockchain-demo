@@ -1,9 +1,6 @@
 ---
 # openshift cluster definition
 openshift:
-  host: "{{ credentials.openshift.host }}"
-  port: "{{ credentials.openshift.port }}"
+  domain: openshift1.lab.local
   username: "{{ credentials.openshift.username }}"
   password: "{{ credentials.openshift.password }}"
-  subdomain: "{{ credentials.openshift.subdomain }}"
-  registry: image-registry.openshift-image-registry.svc:5000

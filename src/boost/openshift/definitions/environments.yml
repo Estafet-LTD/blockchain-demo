@@ -17,7 +17,6 @@ environments:
     - name: build
       display: Build
       description: Build Environment   
-      next: test
       setup:
         - name: boostcd.wiremock_setup  
           tag: 2.25.1
@@ -27,7 +26,6 @@ environments:
       display: Test
       description: Test Environment
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa.git
-      next: perf   
       setup:
         - name: boostcd.amq_setup     
         - name: blockchain_setup      
@@ -36,7 +34,6 @@ environments:
       display: Performance
       description: Performance Test Environment
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-perf.git
-      next: security 
       setup:
         - name: boostcd.amq_setup   
         - name: blockchain_setup         
@@ -45,7 +42,6 @@ environments:
       display: Security
       description: Security Test Environment
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-security.git
-      next: prod  
       setup:
         - name: boostcd.amq_setup     
         - name: blockchain_setup         
@@ -54,7 +50,6 @@ environments:
       display: Production
       description: Production Environment
       test_repo: https://github.com/Estafet-LTD/blockchain-demo-qa-prod.git
-      next: end    
       setup:    
         - name: boostcd.amq_setup
           application_name: blue  
