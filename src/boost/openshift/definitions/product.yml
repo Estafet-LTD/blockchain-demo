@@ -13,11 +13,6 @@ task_manager:
   name: trello
   title: Features
 
-# github
-github:
-  user: "{{ credentials.github.user }}"
-  password: "{{ credentials.github.password }}"
-
 # trello
 trello:
   access_token: "{{ credentials.trello.access_token }}"
@@ -32,9 +27,10 @@ couchbase:
   user: "{{ credentials.couchbase.user }}"
   password: "{{ credentials.couchbase.password }}"
 
-webhooks:
-  setup:
-    - name: boostcd.github_webhook_setup
-
-  teardown:
-    - name: boostcd.github_webhook_teardown
+# git webhooks
+git:
+  user: "{{ credentials.github.user }}"
+  password: "{{ credentials.github.password }}"
+  webhooks:
+    setup: boostcd.github_webhook_setup
+    teardown: boostcd.github_webhook_teardown
